@@ -1,4 +1,4 @@
-import 'package:infinity_youtube/youtube_player/infinity_youtube_player.dart';
+import 'package:infinity_youtube/foundation/app_foundations.dart';
 // --------------------------------------------------------------------------
 void main() => Engine.mainIgnition();
 // --------------------------------------------------------------------------
