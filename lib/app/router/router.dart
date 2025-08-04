@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:go_router/go_router.dart';
 import 'package:infinity_youtube/app/screens/a_home_screen.dart';
+import 'package:infinity_youtube/app/screens/b_vdeo_screen.dart';
 // -----------------------------------------------------------------------------
 
 /// MAIN NAV KEY SUPER GLOBAL KEY
@@ -27,6 +28,7 @@ abstract class Routing {
 
   // --------------------
   static const routeHome = 'home';
+  static const routeVideo = 'video';
   // static const routeVideoInfo = 'info';
   // --------------------
   // static const routeRedirect = 'redirect';
@@ -46,7 +48,14 @@ abstract class Routing {
       GoRoute(
         path: '/',
         name: routeHome,
-        builder: (context, state) => const HomePage(),
+        builder: (context, state) => const HomeScreen(),
+      ),
+
+      /// VIDEO
+      GoRoute(
+        path: '/$routeVideo',
+        name: routeVideo,
+        builder: (context, state) => const VideoScreen(),
       ),
 
       // --------------------

@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:infinity_youtube/app/router/c_routing.dart';
+import 'package:infinity_youtube/app/router/router.dart';
 import 'package:infinity_youtube/core/theme/colorz.dart';
 import 'package:infinity_youtube/core/utilities/vertical_floating_list.dart';
 

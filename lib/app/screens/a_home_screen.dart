@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:infinity_youtube/app/the_youtube_player/the_you_tube_player.dart';
 import 'package:infinity_youtube/core/layout/the_layout.dart';
-import 'package:infinity_youtube/core/utilities/contextual.dart';
+import 'package:infinity_youtube/core/shared_components/super_image/super_image.dart';
+import 'package:infinity_youtube/core/shared_components/super_text/super_text.dart';
+import 'package:infinity_youtube/core/theme/iconz.dart';
 import 'package:infinity_youtube/core/utilities/scale.dart';
 import 'package:infinity_youtube/core/utilities/vertical_floating_list.dart';
 
-class HomePage extends StatelessWidget {
+class HomeScreen extends StatelessWidget {
   // --------------------------------------------------------------------------
-  const HomePage({
+  const HomeScreen({
     super.key
   });
   // -----------------------------------------------------------------------------
@@ -25,17 +26,23 @@ class HomePage extends StatelessWidget {
           top: Scale.appBarHeight + 10,
           // bottom: 0,
         ),
-        columnChildren: <Widget>[
+        columnChildren: const <Widget>[
 
           // --------------------
 
-          TheYoutubePlayer(
-            canvasWidth: context.screenWidth,
-            canvasHeight: context.screenWidth * 0.7,
-            // isMuted: false,
-            // autoPlay: true,
-            // loop: false,
-            url: 'https://youtu.be/46l2HlRQHk8?si=hmnKYWLPKVGRmXqS',
+          SuperText(
+            text: 'Clink on the video link in the website to open the video',
+            maxLines: 4,
+            margins: 15,
+            textHeight: 30,
+          ),
+
+          SuperImage(
+              width: 150,
+              height: 150,
+              pic: Iconz.logo,
+              corners: 20,
+              loading: false,
           ),
 
           // --------------------
