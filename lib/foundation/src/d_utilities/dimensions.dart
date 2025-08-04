@@ -237,9 +237,23 @@ class Dimensions {
 
   // --------------------
   /// TESTED : WORKS PERFECT
+  static bool _isGreaterThan({
+    required num? number,
+    required num? isGreaterThan,
+  }){
+    bool _output = false;
+
+    if (number != null && isGreaterThan != null){
+      _output = number > isGreaterThan;
+    }
+
+    return _output;
+  }
+  // --------------------
+  /// TESTED : WORKS PERFECT
   bool checkIsPortrait(){
 
-    if (Numeric.isGreaterThan(number: height, isGreaterThan: width) == true){
+    if (_isGreaterThan(number: height, isGreaterThan: width) == true){
       return true;
     }
     else {
@@ -251,7 +265,7 @@ class Dimensions {
   /// TESTED : WORKS PERFECT
   bool checkIsLandscape(){
 
-    if (Numeric.isGreaterThan(number: width, isGreaterThan: height) == true){
+    if (_isGreaterThan(number: width, isGreaterThan: height) == true){
       return true;
     }
     else {

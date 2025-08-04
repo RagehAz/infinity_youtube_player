@@ -1,4 +1,4 @@
-part of app_foundations;
+part of super_box;
 
 enum VibrationType {
   heavy,
@@ -522,7 +522,7 @@ class _TapInkLayer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // --------------------
-    if (splashColor == null || splashColor == Colorz.nothing){
+    if (splashColor == null || splashColor == _Helpers.nothing){
       return GestureDetector(
         key: key,
         onTap: onTap == null ? null : () => onTap!.call(),
@@ -539,8 +539,8 @@ class _TapInkLayer extends StatelessWidget {
 
       return InkWell(
         key: key,
-        splashColor: onTap == null ? Colorz.nothing : splashColor,
-        highlightColor: onTap == null ? Colorz.nothing :Colorz.black20,
+        splashColor: onTap == null ? _Helpers.nothing : splashColor,
+        highlightColor: onTap == null ? _Helpers.nothing :_Helpers.black20,
         onTap: onTap == null ? null : () => onTap!.call(),
         onTapCancel: onTapCancel == null ? null : () => onTapCancel!(),
         onLongPress: onLongTap == null ? null : () => onLongTap!(),

@@ -2,6 +2,12 @@ part of app_foundations;
 
 abstract class Colorz {
   // --------------------
+  static const Color infinityLightPurple = Color.fromARGB(255, 102, 64, 247);
+  static const Color infinityDarkPurple = Color.fromARGB(255, 60, 46, 131);
+  static const Color infinityLightGrey = Color.fromARGB(255, 51, 58, 68);
+  static const Color infinityDarkGrey = Color.fromARGB(255, 44, 44, 54);
+  static const Color infinityBlue = Color.fromARGB(255, 24, 41, 209);
+  // --------------------
   static const Color nothing = Color.fromARGB(0, 255, 255, 255);
   // --------------------
   static const int _blackR = 0;

@@ -1,8 +1,8 @@
 part of app_foundations;
 
-class WebLayout extends StatelessWidget {
+class TheLayout extends StatelessWidget {
   // --------------------------------------------------------------------------
-  const WebLayout({
+  const TheLayout({
     required this.child,
     super.key
   });
@@ -19,7 +19,7 @@ class WebLayout extends StatelessWidget {
       /// INSETS
       resizeToAvoidBottomInset: false, /// if false : prevents keyboard from pushing pyramids up / bottom sheet
       // resizeToAvoidBottomPadding: false,
-      backgroundColor: Colorz.black255,
+      backgroundColor: Colorz.infinityLightGrey,
       extendBodyBehindAppBar: true,
       body: SizedBox(
         width: _screenWidth,
@@ -36,7 +36,7 @@ class WebLayout extends StatelessWidget {
             ),
 
             /// APP BAR
-            const WebAppBar(),
+            const TheAppBar(),
 
           ],
         ),

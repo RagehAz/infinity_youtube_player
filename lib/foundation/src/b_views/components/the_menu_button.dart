@@ -40,7 +40,7 @@ class TheMenuButton extends StatelessWidget {
       color: isSelected ? Colorz.black20 : Colorz.white20,
       verseColor: isSelected ? Colorz.black255 : Colorz.white255,
       splashColor: Colorz.black80,
-      corners: Borderers.constantCornersAll10,
+      corners: const BorderRadius.all(Radius.circular(10)),
       // onLongTap: onLongTap,
       // verseHighlight: verseHighlight,
       margins: const EdgeInsets.only(

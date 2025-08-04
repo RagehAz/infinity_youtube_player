@@ -12,7 +12,7 @@ class HomePage extends StatelessWidget {
     final double _screenWidth = Scale.screenWidth(context);
     final double _screenHeight = Scale.screenHeight(context);
     // --------------------
-    return WebLayout(
+    return TheLayout(
       child: VerticalFloatingList(
         width: _screenWidth,
         height: _screenHeight,

@@ -1,5 +1,5 @@
 // ignore_for_file: deprecated_member_use, comment_references, prefer_int_literals, prefer_asserts_with_message, avoid_redundant_argument_values
-part of app_foundations;
+part of super_pop_menu;
 
 const Duration _kMenuDuration = Duration(milliseconds: 300);
 const double _kMenuCloseIntervalEnd = 2.0 / 3.0;

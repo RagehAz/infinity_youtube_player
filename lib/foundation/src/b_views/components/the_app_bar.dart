@@ -1,8 +1,8 @@
 part of app_foundations;
 
-class WebAppBar extends StatelessWidget {
+class TheAppBar extends StatelessWidget {
   // --------------------------------------------------------------------------
-  const WebAppBar({
+  const TheAppBar({
     super.key
   });
   // -----------------------------------------------------------------------------
@@ -16,7 +16,7 @@ class WebAppBar extends StatelessWidget {
       width: _screenWidth,
       height: _appBarHeight,
       decoration: const BoxDecoration(
-        color: Colorz.black255,
+        color: Colorz.infinityDarkGrey,
         // border: Borderers.borderOnly(
         //   color: Colorz.white125,
         //   bottom: true,
@@ -41,7 +41,7 @@ class WebAppBar extends StatelessWidget {
           ),
 
           const SuperPopMenu(
-            corners: Borderers.constantCornersAll15,
+            corners: BorderRadius.all(Radius.circular(15)),
             borderColor: Colorz.white125,
             // offset: const Offset(0, 0),
             bubbleColor: Colorz.black255,

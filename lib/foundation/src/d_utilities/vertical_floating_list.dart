@@ -31,6 +31,45 @@ class VerticalFloatingList extends StatelessWidget {
   final ScrollController? scrollController;
   final Color? borderColor;
   // --------------------------------------------------------------------------
+  /// TESTED : WORKS PERFECT
+  static BorderRadius superCorners({
+    dynamic corners,
+  }) {
+    BorderRadius _corner;
+
+    if (corners == null || corners == 0) {
+      _corner = BorderRadius.zero;
+    }
+
+    else if (corners is num) {
+      _corner = cornerAll(corners.toDouble());
+    }
+
+    else if (corners is BorderRadius) {
+      _corner = corners;
+    }
+
+    else {
+      final Error _error = ArgumentError('superBorder corners is invalid', 'superBorder');
+
+      throw _error;
+    }
+
+    return _corner;
+  }
+  // --------------------
+  /// TESTED : WORKS PERFECT
+  static BorderRadius cornerAll(double? corners) {
+
+    if (corners == null){
+      return BorderRadius.zero;
+    }
+    else {
+      return BorderRadius.all(Radius.circular(corners));
+    }
+
+  }
+  // --------------------------------------------------------------------------
   @override
   Widget build(BuildContext context) {
     // --------------------
@@ -46,7 +85,7 @@ class VerticalFloatingList extends StatelessWidget {
           ),
           decoration: BoxDecoration(
               color: boxColor,
-              borderRadius: Borderers.superCorners(corners: boxCorners),
+              borderRadius: superCorners(corners: boxCorners),
               border: borderColor == null ? null :
               Border.all(
                 width: 0.5,
@@ -69,4 +108,26 @@ class VerticalFloatingList extends StatelessWidget {
     // --------------------
   }
   // --------------------------------------------------------------------------
+}
+
+class AppScrollBehavior extends MaterialScrollBehavior {
+
+  const AppScrollBehavior();
+  /// LETS WINDOWS LISTEN TO SWIPES/DRAGS GESTURES
+  /// AND SHOULD BE PLACED IN THE TOP MOST MATERIAL APP
+  ///  return MaterialApp(
+  ///    scrollBehavior: AppScrollBehavior(),
+  ///    ...
+  ///  );
+  // Override behavior methods and getters like dragDevices
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+    PointerDeviceKind.mouse,
+    PointerDeviceKind.touch,
+    PointerDeviceKind.stylus,
+    PointerDeviceKind.invertedStylus,
+    PointerDeviceKind.trackpad,
+    PointerDeviceKind.unknown,
+  };
+
 }
