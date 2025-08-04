@@ -4,6 +4,8 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   flutter_inappwebview_windows
+  local_auth_windows
+  ultra_secure_flutter_kit
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST

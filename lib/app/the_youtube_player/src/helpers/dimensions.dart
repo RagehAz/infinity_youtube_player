@@ -1,3 +1,5 @@
+// ignore_for_file: unreachable_switch_default
+
 part of the_youtube_player;
 
 @immutable

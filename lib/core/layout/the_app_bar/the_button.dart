@@ -48,7 +48,7 @@ class TheButton extends StatelessWidget {
         child: InkWell(
           onTap: onTap,
           borderRadius: corners ?? BorderRadius.circular(8),
-          splashColor: splashColor ?? Colors.grey.withOpacity(0.2),
+          splashColor: splashColor ?? Colors.grey.withAlpha((255 * 0.2).toInt()),
           child: Container(
             decoration: BoxDecoration(
               borderRadius: corners ?? BorderRadius.circular(8),

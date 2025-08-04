@@ -3,13 +3,46 @@ import 'package:flutter/material.dart';
 import 'package:infinity_youtube/app/router/router.dart';
 import 'package:infinity_youtube/core/theme/colorz.dart';
 import 'package:infinity_youtube/core/utilities/vertical_floating_list.dart';
+import 'package:ultra_secure_flutter_kit/ultra_secure_flutter_kit.dart';
 
-void main() async {
+Future<void> main() async {
+
+  await startSecurity();
 
   // final WidgetsBinding _binding =
   WidgetsFlutterBinding.ensureInitialized();
 
   runApp(const Starter());
+
+}
+
+Future<void> startSecurity() async {
+
+  final UltraSecureFlutterKit securityKit = UltraSecureFlutterKit();
+
+  const SecurityConfig config = SecurityConfig(
+    // mode: SecurityMode.strict,
+    // enableScreenshotBlocking: true,
+    // enableSSLPinning: true,
+    // enableSecureStorage: true,
+    // allowedCertificates: ,
+    // biometricConfig: ,
+    // blockOnHighRisk: ,
+    // customRules: ,
+    // enableBehaviorMonitoring: ,
+    // enableBiometricAuth: ,
+    // enableCodeObfuscation: ,
+    // enableDebugPrintStripping: ,
+    // enableDeveloperModeDetection: ,
+    // enableInstallationSourceVerification: ,
+    // enableMITMDetection: ,
+    // enableNetworkMonitoring: ,
+    // enablePlatformChannelHardening: ,
+    // obfuscationConfig: ,
+    // sslPinningConfig: ,
+  );
+
+  await securityKit.initializeSecureMonitor(config);
 
 }
 

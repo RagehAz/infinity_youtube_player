@@ -61,7 +61,7 @@ class SuperPopMenu extends StatelessWidget {
       padding: EdgeInsets.zero,
       offset: offset,
       menuPadding: EdgeInsets.zero,
-      popUpAnimationStyle: AnimationStyle(curve: Curves.easeIn, duration: const Duration(milliseconds: 300)),
+      popUpAnimationStyle: const AnimationStyle(curve: Curves.easeIn, duration: Duration(milliseconds: 300)),
       constraints: constraints ?? BoxConstraints(
         maxWidth: _Helpers.screenWidth(context) - 20,
       ),

@@ -337,7 +337,7 @@ abstract class _Helpers {
   }
   // --------------------
   /// TESTED : WORKS PERFECT
-  static void blog(dynamic msg, {String? invoker}){
+  static void blog(dynamic msg){
 
     assert((){
       if (kDebugMode) {

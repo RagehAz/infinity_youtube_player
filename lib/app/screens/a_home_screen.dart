@@ -31,7 +31,7 @@ class HomeScreen extends StatelessWidget {
           // --------------------
 
           SuperText(
-            text: 'Clink on the video link in the website to open the video',
+            text: 'Click on the video link in the website to open the video',
             maxLines: 4,
             margins: 15,
             textHeight: 30,
