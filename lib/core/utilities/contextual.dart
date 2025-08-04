@@ -1,4 +1,6 @@
-part of app_foundations;
+import 'dart:ui';
+import 'package:flutter/material.dart';
+import 'package:infinity_youtube/core/utilities/scale.dart';
 
 extension Contexual on BuildContext {
   // -----------------------------------------------------------------------------

@@ -1,4 +1,9 @@
-part of app_foundations;
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:infinity_youtube/app/router/c_routing.dart';
+import 'package:infinity_youtube/core/layout/the_app_bar/the_button.dart';
+import 'package:infinity_youtube/core/theme/colorz.dart';
+import 'package:infinity_youtube/core/utilities/scale.dart';
 
 class TheMenuButton extends StatelessWidget {
   // --------------------------------------------------------------------------

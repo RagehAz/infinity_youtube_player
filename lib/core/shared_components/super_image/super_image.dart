@@ -10,7 +10,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image/image.dart' as img;
-import 'package:infinity_youtube/core/foundation/src/b_views/components/super_text/super_text.dart';
+import '../super_text/super_text.dart';
 // --------------------------------------------------------------------------
 // part 'src/super_filter/color_filter_generator.dart';
 part 'src/super_filter/color_layers.dart';

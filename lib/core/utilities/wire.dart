@@ -1,4 +1,5 @@
-part of app_foundations;
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 typedef Wire<T> = ValueNotifier<T>;
 

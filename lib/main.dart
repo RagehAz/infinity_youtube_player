@@ -1,7 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:infinity_youtube/core/foundation/app_foundations.dart';
-import 'package:infinity_youtube/core/router/c_routing.dart';
+import 'package:infinity_youtube/app/router/c_routing.dart';
+import 'package:infinity_youtube/core/theme/colorz.dart';
+import 'package:infinity_youtube/core/utilities/vertical_floating_list.dart';
 
 void main() async {
 

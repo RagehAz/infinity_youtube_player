@@ -1,4 +1,7 @@
-part of app_foundations;
+import 'package:flutter/material.dart';
+import 'package:infinity_youtube/core/layout/the_app_bar/the_app_bar.dart';
+import 'package:infinity_youtube/core/theme/colorz.dart';
+import 'package:infinity_youtube/core/utilities/scale.dart';
 
 class TheLayout extends StatelessWidget {
   // --------------------------------------------------------------------------

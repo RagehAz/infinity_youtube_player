@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:infinity_youtube/core/foundation/app_foundations.dart';
-import 'package:infinity_youtube/features/the_youtube_player/the_you_tube_player.dart';
+import 'package:infinity_youtube/app/the_youtube_player/the_you_tube_player.dart';
+import 'package:infinity_youtube/core/layout/the_layout.dart';
+import 'package:infinity_youtube/core/utilities/contextual.dart';
+import 'package:infinity_youtube/core/utilities/scale.dart';
+import 'package:infinity_youtube/core/utilities/vertical_floating_list.dart';
 
 class HomePage extends StatelessWidget {
   // --------------------------------------------------------------------------
@@ -18,7 +21,6 @@ class HomePage extends StatelessWidget {
       child: VerticalFloatingList(
         width: _screenWidth,
         height: _screenHeight,
-        boxAlignment: Alignment.topCenter,
         padding: const EdgeInsets.only(
           top: Scale.appBarHeight + 10,
           // bottom: 0,

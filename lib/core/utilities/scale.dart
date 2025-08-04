@@ -1,4 +1,6 @@
-part of app_foundations;
+
+
+import 'package:flutter/material.dart';
 
 abstract class Scale {
   // -----------------------------------------------------------------------------

@@ -1,4 +1,5 @@
-part of app_foundations;
+
+import 'package:flutter/material.dart';
 
 class TheButton extends StatelessWidget {
   // --------------------------------------------------------------------------

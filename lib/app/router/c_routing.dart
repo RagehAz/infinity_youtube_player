@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:go_router/go_router.dart';
-import 'package:infinity_youtube/features/screens/a_home_screen.dart';
+import 'package:infinity_youtube/app/screens/a_home_screen.dart';
 // -----------------------------------------------------------------------------
 
 /// MAIN NAV KEY SUPER GLOBAL KEY
