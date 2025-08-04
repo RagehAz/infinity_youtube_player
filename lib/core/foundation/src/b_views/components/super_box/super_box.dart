@@ -2,8 +2,8 @@ library super_box;
 // -----------------------------------------------------------------------------
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:infinity_youtube/foundation/src/b_views/components/super_image/super_image.dart';
-import 'package:infinity_youtube/foundation/src/b_views/components/super_text/super_text.dart';
+import 'package:infinity_youtube/core/foundation/src/b_views/components/super_image/super_image.dart';
+import 'package:infinity_youtube/core/foundation/src/b_views/components/super_text/super_text.dart';
 // -----------------------------------------------------------------------------
 /// SUPER BOX
 part './src/a_the_super_box.dart';

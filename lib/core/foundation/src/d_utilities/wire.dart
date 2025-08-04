@@ -13,7 +13,7 @@ extension ExtraWire<T> on Wire<T> {
     required T value,
     bool mounted = true,
   }){
-    return setNotifier(notifier: this, mounted: mounted, value: value);
+    return _setNotifier(notifier: this, mounted: mounted, value: value);
   }
   // -----------------------------------------------------------------------------
 
@@ -211,4 +211,68 @@ class UnNullify<T> extends StatelessWidget {
     // --------------------
   }
 // --------------------------------------------------------------------------
+}
+
+bool _setNotifier({
+  required ValueNotifier<dynamic>? notifier,
+  required bool mounted,
+  required dynamic value,
+  bool addPostFrameCallBack = false,
+  Function? onFinish,
+  bool shouldHaveListeners = false,
+  String? invoker,
+}){
+  bool _done = false;
+
+  if (mounted == true){
+    // blog('setNotifier : setting to ${value.toString()}');
+
+    if (notifier != null){
+
+      if (invoker != null){
+        _blog('-> setNotifier($invoker) : $value != <${notifier.value.runtimeType}>${notifier.value} ? ${value != notifier.value}');
+      }
+
+      if (value != notifier.value){
+
+        /// ignore: invalid_use_of_protected_member
+        if (shouldHaveListeners == false || notifier.hasListeners == true){
+
+          if (addPostFrameCallBack == true){
+            WidgetsBinding.instance.addPostFrameCallback((_){
+              notifier.value  = value;
+              if(onFinish != null){
+                onFinish();
+              }
+            });
+          }
+
+          else {
+            notifier.value  = value;
+            if(onFinish != null){
+              onFinish();
+            }
+            _done = true;
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+
+  return _done;
+}
+
+void _blog(dynamic msg){
+
+  assert((){
+    if (kDebugMode) {
+      debugPrint(msg?.toString());
+    }
+    return true;
+  }(), '_');
+
 }

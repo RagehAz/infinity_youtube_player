@@ -1,4 +1,6 @@
-part of app_foundations;
+import 'package:flutter/material.dart';
+import 'package:infinity_youtube/core/foundation/app_foundations.dart';
+import 'package:infinity_youtube/features/the_youtube_player/the_you_tube_player.dart';
 
 class HomePage extends StatelessWidget {
   // --------------------------------------------------------------------------
