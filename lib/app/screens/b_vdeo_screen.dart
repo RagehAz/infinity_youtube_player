@@ -31,7 +31,7 @@ class _VideoScreenState extends State<VideoScreen> {
   List<VideoSourceModel> _videoSources = <VideoSourceModel>[];
   VideoSourceModel? _selectedVideoSource;
   // AudioSourceModel? _selectedAudioSource;
-  final Player player = Player();
+  late Player player;
   late VideoController controller = VideoController(player);
   // --------------------------------------------------------------------------
   @override
@@ -39,7 +39,36 @@ class _VideoScreenState extends State<VideoScreen> {
 
     _videoYoutubeURL = 'https://youtu.be/46l2HlRQHk8?si=hmnKYWLPKVGRmXqS';
 
-    controller = VideoController(player);
+    player = Player(
+      configuration: PlayerConfiguration(
+        // vo: ,
+        // title: ,
+        // async: ,
+        // bufferSize: ,
+        // libass: ,
+        // libassAndroidFont: ,
+        // libassAndroidFontName: ,
+        // logLevel: ,
+        // muted: ,
+        // osc: ,
+        // pitch: ,
+        // protocolWhitelist: ,
+        // ready: ,
+      ),
+    );
+
+    controller = VideoController(
+      player,
+      configuration: VideoControllerConfiguration(
+        // width: ,
+        // height: ,
+        // androidAttachSurfaceAfterVideoParameters: ,
+        // enableHardwareAcceleration: ,
+        // hwdec: ,
+        // scale: ,
+        // vo: ,
+      ),
+    );
 
     super.initState();
   }
