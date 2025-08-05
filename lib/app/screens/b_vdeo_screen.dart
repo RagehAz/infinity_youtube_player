@@ -41,6 +41,7 @@ class _VideoScreenState extends State<VideoScreen> {
 
     player = Player(
       configuration: PlayerConfiguration(
+        vo: 'opengl', // or 'opengl', or 'x11' depending on the platform
         // vo: ,
         // title: ,
         // async: ,
@@ -60,11 +61,11 @@ class _VideoScreenState extends State<VideoScreen> {
     controller = VideoController(
       player,
       configuration: VideoControllerConfiguration(
-        // width: ,
-        // height: ,
+        width: 100,
+        height: (100 * 9.0 / 16.0).toInt(),
         // androidAttachSurfaceAfterVideoParameters: ,
-        // enableHardwareAcceleration: ,
-        // hwdec: ,
+        enableHardwareAcceleration: true,
+        hwdec: 'auto',
         // scale: ,
         // vo: ,
       ),
@@ -174,7 +175,10 @@ class _VideoScreenState extends State<VideoScreen> {
 
     if (_selectedVideoSource != null){
 
-      final Media _media = Media(_selectedVideoSource!.video);
+      // final Media _media = Media(_selectedVideoSource!.video);
+
+      const String _testURL = 'https://d2jraqneynooaz.cloudfront.net/bzz/HLwWnNrTnKcCCDgWW3i9/flyers/xaplnFKfA7LAJDf0CiZk/0_video';
+      final Media _media = Media(_testURL);
 
       await player.open(
         _media,
@@ -352,7 +356,7 @@ class _VideoScreenState extends State<VideoScreen> {
           if (_canBuildVideo == true)
           SuperText(
             boxWidth: context.screenWidth,
-            text: 'Video title',
+            text: _selectedVideoSource?.videoResolution,
             textHeight: 30,
             margins: 10,
           ),
@@ -372,11 +376,18 @@ class _VideoScreenState extends State<VideoScreen> {
 
           /// NEW PLAYER
           if (_canBuildVideo == true)
-            SizedBox(
+            Container(
               width: context.screenWidth,
               height: context.screenWidth * 9.0 / 16.0,
-              // color: Colorz.black255,
-              child: Video(controller: controller),
+              color: Colorz.googleRed,
+              child: Video(
+                controller: controller,
+                width: context.screenWidth,
+                height: context.screenWidth * 9.0 / 16.0,
+                fit: BoxFit.contain,
+                // fill: Colorz.nothing,
+                alignment: Alignment.center,
+              ),
             ),
 
           /// DEBUG CONTROL BAR
@@ -463,14 +474,6 @@ class _VideoScreenState extends State<VideoScreen> {
               );
             }
           ),
-
-          if (kDebugMode)
-            SuperText(
-              text: '[${_selectedVideoSource?.size.totalMegaBytes} Mb].${_selectedVideoSource?.video}',
-              textHeight: 18,
-              maxLines: 50,
-              centered: false,
-            ),
 
           // --------------------
 
