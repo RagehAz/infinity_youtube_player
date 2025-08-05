@@ -3,11 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:infinity_youtube/app/router/router.dart';
 import 'package:infinity_youtube/core/theme/colorz.dart';
 import 'package:infinity_youtube/core/utilities/app_scroll_behavior.dart';
+import 'package:media_kit/media_kit.dart';
 import 'package:no_screenshot/no_screenshot.dart';
 
 Future<void> main() async {
   // final WidgetsBinding _binding =
+
   WidgetsFlutterBinding.ensureInitialized();
+  MediaKit.ensureInitialized();
   await startSecurity();
 
   runApp(const Starter());

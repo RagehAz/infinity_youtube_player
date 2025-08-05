@@ -45,7 +45,10 @@
 		<true />
 		<key>UIApplicationSupportsIndirectInputEvents</key>
 		<true />
-		<key>NSFaceIDUsageDescription</key>
-		<string>This app uses Face ID for secure authentication</string>
+		<key>NSAppTransportSecurity</key>
+		<dict>
+			<key>NSAllowsArbitraryLoads</key>
+			<true />
+		</dict>
 	</dict>
 </plist>
