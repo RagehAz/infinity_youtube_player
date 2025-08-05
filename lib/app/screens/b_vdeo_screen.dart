@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:infinity_youtube/app/router/router.dart';
 import 'package:infinity_youtube/app/the_youtube_player/the_you_tube_player.dart';
 import 'package:infinity_youtube/core/layout/the_layout.dart';
+import 'package:infinity_youtube/core/services/audio_source_analyzer.dart';
+import 'package:infinity_youtube/core/services/audio_source_model.dart';
+import 'package:infinity_youtube/core/services/video_source_analyzer.dart';
+import 'package:infinity_youtube/core/services/video_source_model.dart';
+import 'package:infinity_youtube/core/services/youtube.dart';
+import 'package:infinity_youtube/core/shared_components/super_box/super_box.dart';
 import 'package:infinity_youtube/core/shared_components/super_text/super_text.dart';
+import 'package:infinity_youtube/core/theme/colorz.dart';
 import 'package:infinity_youtube/core/utilities/contextual.dart';
 
 class VideoScreen extends StatefulWidget {
@@ -17,8 +25,17 @@ class VideoScreen extends StatefulWidget {
 
 class _VideoScreenState extends State<VideoScreen> {
   // --------------------------------------------------------------------------
+  final YoutubeParser parser = YoutubeParser();
+  String? _videoYoutubeURL;
+  List<VideoSourceModel> _videoSources = <VideoSourceModel>[];
+  VideoSourceModel? _selectedVideoSource;
+  AudioSourceModel? _selectedAudioSource;
+  // --------------------------------------------------------------------------
   @override
   void initState() {
+
+    _videoYoutubeURL = 'https://youtu.be/46l2HlRQHk8?si=hmnKYWLPKVGRmXqS';
+
     super.initState();
   }
   // --------------------
@@ -51,6 +68,7 @@ class _VideoScreenState extends State<VideoScreen> {
   // --------------------
   @override
   void dispose() {
+    parser.dispose();
     super.dispose();
   }
   // --------------------------------------------------------------------------
@@ -61,6 +79,7 @@ class _VideoScreenState extends State<VideoScreen> {
   String? _loadingText = 'loading';
   bool _canBuildVideo = false;
   // --------------------
+  /// TESTED : WORKS PERFECT
   void setLoadingText(String? text){
     if (mounted && _loadingText != text){
       setState(() {
@@ -69,27 +88,136 @@ class _VideoScreenState extends State<VideoScreen> {
     }
   }
   // --------------------
+  /// TESTED : WORKS PERFECT
   Future<void> _loadVideo() async {
 
-    await Future.delayed(const Duration(milliseconds: 500));
+    blog('_loadVideo(Start)');
 
-    setLoadingText('Fetching User Info ..');
+    if (_videoYoutubeURL != null){
 
-    await Future.delayed(const Duration(milliseconds: 500));
+      setLoadingText('Reading video info ..');
 
-    setLoadingText('Authentication ..');
+      final YouTubeSource _youtubeSource = await parser.parse(_videoYoutubeURL!);
 
-    await Future.delayed(const Duration(milliseconds: 500));
+      if (mounted == true){
 
-    setLoadingText('Getting the video ..');
+        setState(() {
 
-    await Future.delayed(const Duration(milliseconds: 500));
+          /// ALL VIDEO SOURCES
+          _videoSources = VideoSourceAnalyzer.getSmallestVideoOfEachQuality(
+            videoSources: _youtubeSource.video,
+          );
 
-    setState(() {
-      _loadingText = null;
-      _canBuildVideo = true;
-    });
+          /// SELECTED
+          _selectedAudioSource = AudioSourceAnalyzer.getSmallestAudio(
+            audioSources: _youtubeSource.audio,
+          );
+          _selectedVideoSource = _videoSources.last;
 
+          /// BUILD
+          _loadingText = null;
+          _canBuildVideo = true;
+
+        });
+
+      }
+
+    }
+
+    blog('_loadVideo(End)');
+
+  }
+  // --------------------------------------------------------------------------
+
+  /// BOTTOM SHEET
+
+  // --------------------
+  /// TESTED : WORKS PERFECT
+  Future<void> showTheBottomSheet({
+    required List<Widget> tiles,
+  }) async {
+
+    await showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(20),
+
+        ),
+      ),
+      backgroundColor: Colorz.infinityDarkGrey,
+      builder: (context) {
+
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: tiles,
+        );
+
+      },
+    );
+  }
+  // --------------------------------------------------------------------------
+
+  /// PICk QUALITY
+
+  // --------------------
+  /// TESTED : WORKS PERFECT
+  Future<void> _pickQuality() async {
+
+    await showTheBottomSheet(
+      tiles: <Widget>[
+
+        ...List.generate(_videoSources.length, (int index){
+
+          final VideoSourceModel _source = _videoSources[index];
+
+          return _qualityTile(
+              text: _source.quality,
+              isSelected: _selectedVideoSource?.quality == _source.quality,
+              onTap: () async {
+                if (mounted){
+                  _selectedVideoSource = _source;
+                }
+                await Routing.goBack(context: context);
+              },
+          );
+
+        }),
+
+        const SizedBox(
+          width: 40,
+          height: 40,
+        ),
+
+      ],
+    );
+
+  }
+  // --------------------
+  /// TESTED : WORKS PERFECT
+  Widget _qualityTile({
+    required Function onTap,
+    required String text,
+    required bool isSelected,
+    dynamic icon,
+  }) {
+    return SuperBox(
+      height: 60,
+      width: context.screenWidth - 10,
+      color: isSelected ? Colorz.white50 : Colorz.white20,
+      borderColor: isSelected ? Colorz.white125 : null,
+      margins: const EdgeInsets.symmetric(
+        vertical: 5,
+        horizontal: 5,
+      ),
+      icon: icon,
+      textColor: Colorz.black255,
+      text: text,
+      // appIsLTR: true,
+      // textDirection: TextDirection.ltr,
+      textCentered: false,
+      onTap: () => onTap(),
+    );
   }
   // --------------------------------------------------------------------------
   @override
@@ -135,14 +263,51 @@ class _VideoScreenState extends State<VideoScreen> {
 
           /// NEW PLAYER
           if (_canBuildVideo == true)
-            TheYoutubePlayer(
-              canvasWidth: context.screenWidth,
-              canvasHeight: context.screenWidth * 0.7,
-              // isMuted: false,
-              // autoPlay: true,
-              // loop: false,
-              url: 'https://youtu.be/46l2HlRQHk8?si=hmnKYWLPKVGRmXqS',
+            Container(
+              width: context.screenWidth,
+              height: context.screenWidth * 0.7,
+              color: Colorz.black255,
             ),
+
+          /// DEBUG CONTROL BAR
+          Builder(
+            builder: (context) {
+
+              const double barHeight = 70;
+              const double buttonSize = 50;
+
+              return Container(
+                width: context.screenWidth,
+                height: barHeight,
+                color: Colorz.black255,
+                margin: const EdgeInsets.symmetric(vertical: 5),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: <Widget>[
+
+                      const SizedBox(width: 5, height: 5),
+
+                      _TestButton(
+                        size: buttonSize,
+                        text: 'Load Video source',
+                        icon: Icons.cloud_download_outlined,
+                        onTap: _loadVideo,
+                      ),
+
+                      _TestButton(
+                        size: buttonSize,
+                        text: 'Quality',
+                        icon: Icons.keyboard_capslock_outlined,
+                        onTap: _pickQuality,
+                      ),
+
+                    ],
+                  ),
+                ),
+              );
+            }
+          ),
 
           // --------------------
 
@@ -152,4 +317,35 @@ class _VideoScreenState extends State<VideoScreen> {
     // --------------------
   }
   // --------------------------------------------------------------------------
+}
+
+class _TestButton extends StatelessWidget {
+  // --------------------------------------------------------------------------
+  const _TestButton({
+    required this.text,
+    required this.icon,
+    required this.onTap,
+    required this.size,
+  });
+  // --------------------
+  final String text;
+  final dynamic icon;
+  final Function onTap;
+  final double size;
+  // -----------------------------------------------------------------------------
+  @override
+  Widget build(BuildContext context) {
+    // --------------------
+    return SuperBox(
+      height: size,
+      text: text,
+      icon: icon,
+      iconSizeFactor: 0.7,
+      color: Colorz.white20,
+      onTap: onTap,
+      margins: const EdgeInsets.symmetric(horizontal: 5),
+    );
+    // --------------------
+  }
+  // -----------------------------------------------------------------------------
 }

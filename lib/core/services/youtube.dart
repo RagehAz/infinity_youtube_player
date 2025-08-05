@@ -1,7 +1,11 @@
-import 'package:infinity_youtube/core/services/models.dart';
+import 'package:infinity_youtube/core/services/audio_source_model.dart';
+import 'package:infinity_youtube/core/services/video_source_model.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
-typedef YtSource = ({List<Vid> video, List<Aud> audio});
+typedef YouTubeSource = ({
+List<VideoSourceModel> video,
+List<AudioSourceModel> audio,
+});
 
 class YoutubeParser {
   // --------------------------------------------------------------------------
@@ -10,24 +14,28 @@ class YoutubeParser {
 
   // --------------------
   final YoutubeExplode explode = YoutubeExplode();
+  // --------------------
+  void dispose(){
+    explode.close();
+  }
   // --------------------------------------------------------------------------
 
   /// PARSER
 
   // --------------------
-  Future<YtSource> parse(String url) async {
+  Future<YouTubeSource> parse(String url) async {
 
     final StreamManifest manifest = await explode.videos.streams.getManifest(url);
 
-    final List<Vid> videoList = <Vid>[];
-    final List<Aud> audioList = <Aud>[];
+    final List<VideoSourceModel> videoList = <VideoSourceModel>[];
+    final List<AudioSourceModel> audioList = <AudioSourceModel>[];
 
     /// LOOP VIDEOS
     for (final stream in manifest.videoOnly) {
       if (stream.container != StreamContainer.mp4) {
         continue;
       }
-      videoList.add(Vid.fromStreamInfo(stream));
+      videoList.add(VideoSourceModel.fromStreamInfo(stream));
     }
 
     /// LOOP AUDIOS
@@ -35,7 +43,7 @@ class YoutubeParser {
       if (stream.container != StreamContainer.mp4) {
         continue;
       }
-      audioList.add(Aud.fromStreamInfo(stream));
+      audioList.add(AudioSourceModel.fromStreamInfo(stream));
     }
 
     return (video: videoList, audio: audioList);
