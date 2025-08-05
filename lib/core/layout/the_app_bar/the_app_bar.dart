@@ -1,5 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:infinity_youtube/app/router/router.dart';
 import 'package:infinity_youtube/core/layout/the_app_bar/the_menu_button.dart';
 import 'package:infinity_youtube/core/shared_components/super_box/super_box.dart';
@@ -7,23 +7,29 @@ import 'package:infinity_youtube/core/shared_components/super_image/super_image.
 import 'package:infinity_youtube/core/shared_components/super_pop_menu/super_pop_menu.dart';
 import 'package:infinity_youtube/core/theme/colorz.dart';
 import 'package:infinity_youtube/core/theme/iconz.dart';
+import 'package:infinity_youtube/core/utilities/contextual.dart';
 import 'package:infinity_youtube/core/utilities/scale.dart';
 
-class TheAppBar extends StatelessWidget {
+class TheAppBar extends StatelessWidget implements PreferredSizeWidget {
   // --------------------------------------------------------------------------
-  const TheAppBar({
-    super.key
-  });
+  const TheAppBar({super.key});
   // -----------------------------------------------------------------------------
+
+  @override
+  Size get preferredSize => const Size.fromHeight(Scale.appBarHeight);
+
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
     // --------------------
     final double _screenWidth = Scale.screenWidth(context);
     const double _appBarHeight = Scale.appBarHeight;
+    final topMargin = context.safeAreaTopPadding;
     // --------------------
     return Container(
       width: _screenWidth,
-      height: _appBarHeight,
+      height: _appBarHeight + topMargin,
+      padding: EdgeInsets.only(top: topMargin),
       decoration: const BoxDecoration(
         color: Colorz.infinityDarkGrey,
         // border: Borderers.borderOnly(
@@ -32,9 +38,9 @@ class TheAppBar extends StatelessWidget {
         // ),
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-
           SuperBox(
             onTap: () => Routing.goTo(route: Routing.routeHome),
             height: _appBarHeight,
@@ -54,40 +60,17 @@ class TheAppBar extends StatelessWidget {
             popupChild: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-
                 /// HOME
-                TheMenuButton(
-                  text: 'Home',
-                  route: Routing.routeHome,
-                ),
+                TheMenuButton(text: 'Home', route: Routing.routeHome),
 
-                /// HOME
-                if (kDebugMode)
-                TheMenuButton(
-                  text: 'Video (debug)',
-                  route: Routing.routeVideo,
-                ),
+                /// For Demo
+                TheMenuButton(text: 'Video (Demo)', route: Routing.routeVideo),
 
                 // --------------------
-
-                /// SPACER
-                SizedBox(
-                  width: 10,
-                  height: 5,
-                ),
-
-                /// SPACER
-                SizedBox(
-                  width: 10,
-                  height: 10,
-                ),
-
               ],
             ),
             child: Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 10,
-              ),
+              padding: EdgeInsets.symmetric(horizontal: 10),
               child: SuperImage(
                 height: Scale.appBarHeight,
                 width: Scale.appBarHeight,
@@ -97,11 +80,11 @@ class TheAppBar extends StatelessWidget {
               ),
             ),
           ),
-
         ],
       ),
     );
     // --------------------
   }
-// -----------------------------------------------------------------------------
+
+  // -----------------------------------------------------------------------------
 }
