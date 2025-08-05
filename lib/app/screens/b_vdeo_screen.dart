@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:infinity_youtube/app/router/router.dart';
 import 'package:infinity_youtube/app/the_youtube_player/the_you_tube_player.dart';
@@ -26,6 +25,9 @@ class VideoScreen extends StatefulWidget {
 
 class _VideoScreenState extends State<VideoScreen> {
   // --------------------------------------------------------------------------
+  static const String _testURL = 'https://d2jraqneynooaz.cloudfront.net/bzz/HLwWnNrTnKcCCDgWW3i9/flyers/xaplnFKfA7LAJDf0CiZk/0_video';
+  static const String _youtubeURL = 'https://youtu.be/46l2HlRQHk8?si=hmnKYWLPKVGRmXqS';
+  // --------------------------------------------------------------------------
   final YoutubeParser parser = YoutubeParser();
   String? _videoYoutubeURL;
   List<VideoSourceModel> _videoSources = <VideoSourceModel>[];
@@ -37,7 +39,7 @@ class _VideoScreenState extends State<VideoScreen> {
   @override
   void initState() {
 
-    _videoYoutubeURL = 'https://youtu.be/46l2HlRQHk8?si=hmnKYWLPKVGRmXqS';
+    _videoYoutubeURL = _youtubeURL;
 
     player = Player(
       configuration: PlayerConfiguration(
@@ -64,7 +66,7 @@ class _VideoScreenState extends State<VideoScreen> {
         width: 100,
         height: (100 * 9.0 / 16.0).toInt(),
         // androidAttachSurfaceAfterVideoParameters: ,
-        enableHardwareAcceleration: true,
+        // enableHardwareAcceleration: true,
         hwdec: 'auto',
         // scale: ,
         // vo: ,
@@ -175,10 +177,7 @@ class _VideoScreenState extends State<VideoScreen> {
 
     if (_selectedVideoSource != null){
 
-      // final Media _media = Media(_selectedVideoSource!.video);
-
-      const String _testURL = 'https://d2jraqneynooaz.cloudfront.net/bzz/HLwWnNrTnKcCCDgWW3i9/flyers/xaplnFKfA7LAJDf0CiZk/0_video';
-      final Media _media = Media(_testURL);
+      final Media _media = Media(_selectedVideoSource!.video);
 
       await player.open(
         _media,
@@ -356,7 +355,7 @@ class _VideoScreenState extends State<VideoScreen> {
           if (_canBuildVideo == true)
           SuperText(
             boxWidth: context.screenWidth,
-            text: _selectedVideoSource?.videoResolution,
+            text: 'youtube player',
             textHeight: 30,
             margins: 10,
           ),
@@ -364,15 +363,23 @@ class _VideoScreenState extends State<VideoScreen> {
           // --------------------
 
           /// OLD BASIC PLAYER
-          // if (_canBuildVideo == true)
-          // TheYoutubePlayer(
-          //   canvasWidth: context.screenWidth,
-          //   canvasHeight: context.screenWidth * 0.7,
-          //   // isMuted: false,
-          //   // autoPlay: true,
-          //   // loop: false,
-          //   url: 'https://youtu.be/46l2HlRQHk8?si=hmnKYWLPKVGRmXqS',
-          // ),
+          if (_canBuildVideo == true)
+          TheYoutubePlayer(
+            canvasWidth: context.screenWidth,
+            canvasHeight: context.screenWidth * 0.7,
+            // isMuted: false,
+            // autoPlay: true,
+            // loop: false,
+            url: _videoYoutubeURL,
+          ),
+
+          if (_canBuildVideo == true)
+            SuperText(
+              boxWidth: context.screenWidth,
+              text: 'Media kit',
+              textHeight: 30,
+              margins: 10,
+            ),
 
           /// NEW PLAYER
           if (_canBuildVideo == true)
@@ -384,9 +391,9 @@ class _VideoScreenState extends State<VideoScreen> {
                 controller: controller,
                 width: context.screenWidth,
                 height: context.screenWidth * 9.0 / 16.0,
-                fit: BoxFit.contain,
+                // fit: BoxFit.contain,
                 // fill: Colorz.nothing,
-                alignment: Alignment.center,
+                // alignment: Alignment.center,
               ),
             ),
 
