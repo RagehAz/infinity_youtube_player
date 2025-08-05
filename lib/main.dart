@@ -14,12 +14,8 @@ Future<void> main() async {
   // final WidgetsBinding _binding =
   WidgetsFlutterBinding.ensureInitialized();
   MediaKit.ensureInitialized();
-  await startSecurity();
-  runApp(const Starter());
-}
-// --------------------
-Future<void> startSecurity() async {
   await NoScreenshot.instance.screenshotOff();
+  runApp(const Starter());
 }
 // --------------------------------------------------------------------------
 

@@ -1,9 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:infinity_youtube/app/router/router.dart';
 import 'package:infinity_youtube/app/the_youtube_player/the_you_tube_player.dart';
 import 'package:infinity_youtube/core/layout/the_layout.dart';
-import 'package:infinity_youtube/core/services/audio_source_analyzer.dart';
-import 'package:infinity_youtube/core/services/audio_source_model.dart';
 import 'package:infinity_youtube/core/services/video_source_analyzer.dart';
 import 'package:infinity_youtube/core/services/video_source_model.dart';
 import 'package:infinity_youtube/core/services/youtube.dart';
@@ -11,6 +10,8 @@ import 'package:infinity_youtube/core/shared_components/super_box/super_box.dart
 import 'package:infinity_youtube/core/shared_components/super_text/super_text.dart';
 import 'package:infinity_youtube/core/theme/colorz.dart';
 import 'package:infinity_youtube/core/utilities/contextual.dart';
+import 'package:media_kit/media_kit.dart';
+import 'package:media_kit_video/media_kit_video.dart';
 
 class VideoScreen extends StatefulWidget {
   // --------------------------------------------------------------------------
@@ -29,12 +30,16 @@ class _VideoScreenState extends State<VideoScreen> {
   String? _videoYoutubeURL;
   List<VideoSourceModel> _videoSources = <VideoSourceModel>[];
   VideoSourceModel? _selectedVideoSource;
-  AudioSourceModel? _selectedAudioSource;
+  // AudioSourceModel? _selectedAudioSource;
+  final Player player = Player();
+  late VideoController controller = VideoController(player);
   // --------------------------------------------------------------------------
   @override
   void initState() {
 
     _videoYoutubeURL = 'https://youtu.be/46l2HlRQHk8?si=hmnKYWLPKVGRmXqS';
+
+    controller = VideoController(player);
 
     super.initState();
   }
@@ -69,6 +74,7 @@ class _VideoScreenState extends State<VideoScreen> {
   @override
   void dispose() {
     parser.dispose();
+    player.dispose();
     super.dispose();
   }
   // --------------------------------------------------------------------------
@@ -109,9 +115,9 @@ class _VideoScreenState extends State<VideoScreen> {
           );
 
           /// SELECTED
-          _selectedAudioSource = AudioSourceAnalyzer.getSmallestAudio(
-            audioSources: _youtubeSource.audio,
-          );
+          // _selectedAudioSource = AudioSourceAnalyzer.getSmallestAudio(
+          //   audioSources: _youtubeSource.audio,
+          // );
           _selectedVideoSource = _videoSources.last;
 
           /// BUILD
@@ -120,12 +126,65 @@ class _VideoScreenState extends State<VideoScreen> {
 
         });
 
+        await _startPlayer();
+
       }
 
     }
 
     blog('_loadVideo(End)');
 
+  }
+  // --------------------------------------------------------------------------
+
+  /// VIDEO PLAYING
+
+  // --------------------
+  ///
+  Future<void> _startPlayer() async {
+
+    if (_selectedVideoSource != null){
+
+      final Media _media = Media(_selectedVideoSource!.video);
+
+      await player.open(
+        _media,
+        // play: true,
+      );
+
+      // await player.play();
+
+    }
+
+  }
+  // --------------------
+  ///
+  Future<void> _requestAccess() async {
+    /*
+    if (/* Android 13 or higher. */) {
+      // Video permissions.
+      if (await Permission.videos.isDenied || await Permission.videos.isPermanentlyDenied) {
+        final state = await Permission.videos.request();
+        if (!state.isGranted) {
+          await SystemNavigator.pop();
+        }
+      }
+      // Audio permissions.
+      if (await Permission.audio.isDenied || await Permission.audio.isPermanentlyDenied) {
+        final state = await Permission.audio.request();
+        if (!state.isGranted) {
+          await SystemNavigator.pop();
+        }
+      }
+    } else {
+      if (await Permission.storage.isDenied || await Permission.storage.isPermanentlyDenied) {
+        final state = await Permission.storage.request();
+        if (!state.isGranted) {
+          await SystemNavigator.pop();
+        }
+      }
+    }
+     */
   }
   // --------------------------------------------------------------------------
 
@@ -171,14 +230,35 @@ class _VideoScreenState extends State<VideoScreen> {
 
           final VideoSourceModel _source = _videoSources[index];
 
+          final String _mbs = _source.size.totalMegaBytes.toStringAsFixed(2);
+
           return _qualityTile(
-              text: _source.quality,
+              text: '${_source.quality} . $_mbs Mb',
               isSelected: _selectedVideoSource?.quality == _source.quality,
               onTap: () async {
+
+                blog('wiping');
+
                 if (mounted){
-                  _selectedVideoSource = _source;
+                  setState(() {
+                    _canBuildVideo = false;
+                    _selectedVideoSource = null;
+                  });
                 }
+
                 await Routing.goBack(context: context);
+
+                if (mounted){
+                  setState(() {
+                    _canBuildVideo = true;
+                    _selectedVideoSource = _source;
+                  });
+                }
+
+                await _startPlayer();
+
+                blog('starting');
+
               },
           );
 
@@ -263,10 +343,11 @@ class _VideoScreenState extends State<VideoScreen> {
 
           /// NEW PLAYER
           if (_canBuildVideo == true)
-            Container(
+            SizedBox(
               width: context.screenWidth,
-              height: context.screenWidth * 0.7,
-              color: Colorz.black255,
+              height: context.screenWidth * 9.0 / 16.0,
+              // color: Colorz.black255,
+              child: Video(controller: controller),
             ),
 
           /// DEBUG CONTROL BAR
@@ -302,12 +383,65 @@ class _VideoScreenState extends State<VideoScreen> {
                         onTap: _pickQuality,
                       ),
 
+                      _TestButton(
+                        size: buttonSize,
+                        text: 'Play',
+                        icon: Icons.play_arrow,
+                        onTap: () => player.play(),
+                      ),
+
+                      _TestButton(
+                        size: buttonSize,
+                        text: 'Pause',
+                        icon: Icons.pause,
+                        onTap: () async {
+
+                          if (mounted){
+                            await player.pause();
+                            setState(() {});
+                          }
+
+                        },
+                      ),
+
+                      _TestButton(
+                        size: buttonSize,
+                        text: 'Print Sources',
+                        icon: Icons.print,
+                        onTap: () async {
+
+                          final List<String> _unique = [];
+
+                          blog('start');
+                          for (final VideoSourceModel source in _videoSources){
+                            blog(source);
+
+                            if (_unique.contains(source.video) == false){
+                              _unique.add(source.video);
+                            }
+
+                          }
+                          blog('done -----------------------');
+
+                          blog('_unique links (${_unique.length}) links');
+
+                        },
+                      ),
+
                     ],
                   ),
                 ),
               );
             }
           ),
+
+          if (kDebugMode)
+            SuperText(
+              text: '[${_selectedVideoSource?.size.totalMegaBytes} Mb].${_selectedVideoSource?.video}',
+              textHeight: 18,
+              maxLines: 50,
+              centered: false,
+            ),
 
           // --------------------
 
