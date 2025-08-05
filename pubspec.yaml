@@ -14,8 +14,8 @@ dependencies:
     sdk: flutter
   # ------------------------------------
   go_router: ^15.1.2
+  no_screenshot: ^0.3.1 
   image: ^4.5.4
-  ultra_secure_flutter_kit: ^1.1.0
   youtube_player_flutter: ^9.1.1
   # ------------------------------------
 dev_dependencies:
