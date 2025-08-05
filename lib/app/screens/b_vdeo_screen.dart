@@ -9,13 +9,14 @@ class VideoScreen extends StatefulWidget {
   const VideoScreen({
     super.key
   });
-
+  // --------------------
   @override
   State<VideoScreen> createState() => _VideoScreenState();
+  // --------------------------------------------------------------------------
 }
 
 class _VideoScreenState extends State<VideoScreen> {
-  // -----------------------------------------------------------------------------
+  // --------------------------------------------------------------------------
   @override
   void initState() {
     super.initState();
@@ -53,6 +54,10 @@ class _VideoScreenState extends State<VideoScreen> {
     super.dispose();
   }
   // --------------------------------------------------------------------------
+
+  /// INITIAL LOADING
+
+  // --------------------
   String? _loadingText = 'loading';
   bool _canBuildVideo = false;
   // --------------------
@@ -86,7 +91,7 @@ class _VideoScreenState extends State<VideoScreen> {
     });
 
   }
-  // -----------------------------------------------------------------------------
+  // --------------------------------------------------------------------------
   @override
   Widget build(BuildContext context) {
     // --------------------
@@ -94,6 +99,8 @@ class _VideoScreenState extends State<VideoScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+
+          // --------------------
 
           if (_canBuildVideo == false)
             SuperText(
@@ -115,15 +122,27 @@ class _VideoScreenState extends State<VideoScreen> {
 
           // --------------------
 
+          /// OLD BASIC PLAYER
+          // if (_canBuildVideo == true)
+          // TheYoutubePlayer(
+          //   canvasWidth: context.screenWidth,
+          //   canvasHeight: context.screenWidth * 0.7,
+          //   // isMuted: false,
+          //   // autoPlay: true,
+          //   // loop: false,
+          //   url: 'https://youtu.be/46l2HlRQHk8?si=hmnKYWLPKVGRmXqS',
+          // ),
+
+          /// NEW PLAYER
           if (_canBuildVideo == true)
-          TheYoutubePlayer(
-            canvasWidth: context.screenWidth,
-            canvasHeight: context.screenWidth * 0.7,
-            // isMuted: false,
-            // autoPlay: true,
-            // loop: false,
-            url: 'https://youtu.be/46l2HlRQHk8?si=hmnKYWLPKVGRmXqS',
-          ),
+            TheYoutubePlayer(
+              canvasWidth: context.screenWidth,
+              canvasHeight: context.screenWidth * 0.7,
+              // isMuted: false,
+              // autoPlay: true,
+              // loop: false,
+              url: 'https://youtu.be/46l2HlRQHk8?si=hmnKYWLPKVGRmXqS',
+            ),
 
           // --------------------
 

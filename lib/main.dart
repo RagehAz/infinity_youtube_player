@@ -5,21 +5,27 @@ import 'package:infinity_youtube/core/theme/colorz.dart';
 import 'package:infinity_youtube/core/utilities/app_scroll_behavior.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:no_screenshot/no_screenshot.dart';
+// --------------------------------------------------------------------------
 
+/// MAIN
+
+// --------------------
 Future<void> main() async {
   // final WidgetsBinding _binding =
-
   WidgetsFlutterBinding.ensureInitialized();
   MediaKit.ensureInitialized();
   await startSecurity();
-
   runApp(const Starter());
 }
-
+// --------------------
 Future<void> startSecurity() async {
   await NoScreenshot.instance.screenshotOff();
 }
+// --------------------------------------------------------------------------
 
+/// STARTER WIDGET
+
+// --------------------
 class Starter extends StatefulWidget {
   // --------------------------------------------------------------------------
   const Starter({super.key});
@@ -28,7 +34,7 @@ class Starter extends StatefulWidget {
   _StarterState createState() => _StarterState();
   // --------------------------------------------------------------------------
 }
-
+// --------------------
 class _StarterState extends State<Starter> with WidgetsBindingObserver {
   // -----------------------------------------------------------------------------
   @override
@@ -126,3 +132,4 @@ class _StarterState extends State<Starter> with WidgetsBindingObserver {
 
   // -----------------------------------------------------------------------------
 }
+// --------------------------------------------------------------------------
