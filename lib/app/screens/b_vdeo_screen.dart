@@ -10,6 +10,7 @@ import 'package:infinity_youtube/core/services/youtube.dart';
 import 'package:infinity_youtube/core/shared_components/super_box/super_box.dart';
 import 'package:infinity_youtube/core/shared_components/super_text/super_text.dart';
 import 'package:infinity_youtube/core/theme/colorz.dart';
+import 'package:infinity_youtube/core/theme/fonts.dart';
 import 'package:infinity_youtube/core/utilities/contextual.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
@@ -266,6 +267,7 @@ class _VideoScreenState extends State<VideoScreen> {
     );
     // --------------------
     return TheLayout(
+      backgroundColor: Colorz.black255,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -276,8 +278,8 @@ class _VideoScreenState extends State<VideoScreen> {
               text: _loadingText,
               textHeight: 30,
               margins: 10,
+              font: InfinityFont.regular,
             ),
-
           // --------------------
           if (_canBuildVideo == true)
             SuperText(
@@ -285,8 +287,9 @@ class _VideoScreenState extends State<VideoScreen> {
               text: '<Video Title>',
               textHeight: 30,
               margins: 10,
+              font: InfinityFont.regular,
             ),
-
+          // --------------------
           /// NEW PLAYER
           if (_canBuildVideo == true)
             MaterialVideoControlsTheme(
@@ -302,13 +305,11 @@ class _VideoScreenState extends State<VideoScreen> {
                 ),
               ),
             ),
-
           // --------------------
         ],
       ),
     );
     // --------------------
   }
-
   // --------------------------------------------------------------------------
 }

@@ -1,14 +1,37 @@
-
-
 import 'package:flutter/material.dart';
 
 abstract class Colorz {
   // --------------------
-  static const Color infinityLightPurple = Color.fromARGB(255, 102, 64, 247);
-  static const Color infinityDarkPurple = Color.fromARGB(255, 60, 46, 131);
-  static const Color infinityLightGrey = Color.fromARGB(255, 51, 58, 68);
-  static const Color infinityDarkGrey = Color.fromARGB(255, 44, 44, 54);
-  static const Color infinityBlue = Color.fromARGB(255, 24, 41, 209);
+  static const Color majorelleBlue        = Color.fromARGB(255, 93, 66, 242); // #5d42f2
+  static const Color majorelleBlueDark1   = Color.fromARGB(255, 79, 58, 216); // #4f3ad8
+  static const Color majorelleBlueDark2   = Color.fromARGB(255, 66, 47, 190); // #422fbe
+  static const Color majorelleBlueDark3   = Color.fromARGB(255, 53, 36, 164); // #3524a4
+  static const Color majorelleBlueDark4   = Color.fromARGB(255, 38, 24, 130); // #261882
+  static const Color majorelleBlueDark5   = Color.fromARGB(255, 23, 13, 88);  // #170d58
+  // --------------------
+  static const Color lightSeaGreen        = Color.fromARGB(255, 0, 184, 175); // #00b8af
+  static const Color lightSeaGreenDark1   = Color.fromARGB(255, 0, 157, 150); // #009d96
+  static const Color lightSeaGreenDark2   = Color.fromARGB(255, 0, 131, 125); // #00837d
+  static const Color lightSeaGreenDark3   = Color.fromARGB(255, 0, 105, 100); // #006964
+  static const Color lightSeaGreenDark4   = Color.fromARGB(255, 0, 79, 75);   // #004f4b
+  static const Color lightSeaGreenDark5   = Color.fromARGB(255, 0, 52, 50);   // #003432
+  // --------------------
+  static const Color blue        = Color.fromARGB(255, 0, 25, 247); // #0019f7
+  static const Color blueDark1   = Color.fromARGB(255, 0, 21, 210); // #0015d2
+  static const Color blueDark2   = Color.fromARGB(255, 0, 17, 175); // #0011af
+  static const Color blueDark3   = Color.fromARGB(255, 0, 14, 140); // #000e8c
+  static const Color blueDark4   = Color.fromARGB(255, 0, 10, 105); // #000a69
+  static const Color blueDark5   = Color.fromARGB(255, 0, 7, 70);   // #000746
+  // --------------------
+  /// Black & White
+  static const Color black = Color.fromARGB(255, 0, 0, 0);       // #000000
+  static const Color white = Color.fromARGB(255, 255, 255, 255); // #ffffff
+  // --------------------
+  /// Greys
+  static const Color greyLightest = Color.fromARGB(255, 219, 219, 219); // #dbdbdb
+  static const Color greyLight    = Color.fromARGB(255, 164, 164, 164); // #a4a4a4
+  static const Color greyDark     = Color.fromARGB(255, 109, 109, 109); // #6d6d6d
+  static const Color greyDarkest  = Color.fromARGB(255, 36, 36, 36);    // #242424
   // --------------------
   static const Color nothing = Color.fromARGB(0, 255, 255, 255);
   // --------------------
@@ -27,9 +50,9 @@ abstract class Colorz {
   static const Color black230 = Color.fromARGB(230, _blackR, _blackG, _blackB);
   static const Color black255 = Color.fromARGB(255, _blackR, _blackG, _blackB);
   // --------------------
-  static const int _whiteR = 247;
-  static const int _whiteG = 247;
-  static const int _whiteB = 247;
+  static const int _whiteR = 255;
+  static const int _whiteG = 255;
+  static const int _whiteB = 255;
   static const Color white10 = Color.fromARGB(10, _whiteR, _whiteG, _whiteB);
   static const Color white20 = Color.fromARGB(20, _whiteR, _whiteG, _whiteB);
   static const Color white30 = Color.fromARGB(30, _whiteR, _whiteG, _whiteB);
@@ -39,16 +62,6 @@ abstract class Colorz {
   static const Color white200 = Color.fromARGB(200, _whiteR, _whiteG, _whiteB);
   static const Color white230 = Color.fromARGB(230, _whiteR, _whiteG, _whiteB);
   static const Color white255 = Color.fromARGB(255, _whiteR, _whiteG, _whiteB);
-  // --------------------
-  static const Color grey50 = Color.fromARGB(50, 121, 121, 121);
-  static const Color grey80 = Color.fromARGB(80, 121, 121, 121);
-  static const Color grey150 = Color.fromARGB(150, 121, 121, 121);
-  static const Color grey255 = Color.fromARGB(255, 200, 200, 200);
-  // --------------------
-  static const Color lightGrey255 = Color.fromARGB(255, 220, 220, 220);
-  // --------------------
-  static const Color darkGrey255 = Color.fromARGB(255, 180, 180, 180);
-  static const Color darkGrey80 = Color.fromARGB(80, 180, 180, 180);
   // --------------------
   static const Color facebook = Color.fromARGB(255, 59, 89, 152);
   static const Color linkedIn = Color.fromARGB(255, 0, 115, 176);
@@ -69,38 +82,5 @@ abstract class Colorz {
   // --------------------
   static const Color telegramLightBlue = Color.fromARGB(255, 56, 176, 227);
   static const Color telegramDarkBlue = Color.fromARGB(255, 29, 147, 210);
-  // -------------------------------------------------------------------------
-  static const List<Color> allColorz = <Color>[
-    nothing,
-    black0,
-    black10,
-    black20,
-    black50,
-    black80,
-    black125,
-    black150,
-    black200,
-    black230,
-    black255,
-    white10,
-    white20,
-    white30,
-    white50,
-    white80,
-    white125,
-    white200,
-    white230,
-    white255,
-    grey50,
-    grey80,
-    grey255,
-    lightGrey255,
-    darkGrey255,
-    facebook,
-    linkedIn,
-    googleRed,
-    telegramLightBlue,
-    telegramDarkBlue,
-  ];
   // -----------------------------------------------------------------------------
 }

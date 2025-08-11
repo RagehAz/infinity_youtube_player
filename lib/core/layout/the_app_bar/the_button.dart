@@ -57,11 +57,10 @@ class TheButton extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 12),
             alignment: Alignment.center,
             child: Row(
-              mainAxisAlignment: verseCentered
-                  ? MainAxisAlignment.center
-                  : MainAxisAlignment.start,
+              mainAxisAlignment: verseCentered ? MainAxisAlignment.center : MainAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
+
                 if (icon != null) ...[
                   Icon(
                     icon,
@@ -70,17 +69,19 @@ class TheButton extends StatelessWidget {
                   ),
                   const SizedBox(width: 8),
                 ],
+
                 Flexible(
                   child: Text(
                     text,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    textAlign:
-                    verseCentered ? TextAlign.center : TextAlign.start,
+                    textAlign: verseCentered ? TextAlign.center : TextAlign.start,
+                    textDirection: TextDirection.ltr,
                     style: TextStyle(
                       fontFamily: font,
                       fontSize: 16 * verseScaleFactor,
-                      fontWeight: FontWeight.w600,
+                      // fontWeight: FontWeight.w100,
+                      // fontStyle: FontStyle.italic,
                       color: verseColor ?? Colors.white,
                     ),
                   ),

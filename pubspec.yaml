@@ -3,7 +3,7 @@ description: "a youtube video player for infinity"
 publish_to: "none"
 # --------------------------------------------------------------------------------
 # THE_APP_VERSION
-version: 0.0.1
+version: 0.0.2
 # --------------------------------------------------------------------------------
 environment:
   sdk: ">=3.8.1 <4.0.0"
@@ -35,10 +35,42 @@ flutter:
     - assets/
     - assets/banner.jpg
     - assets/icon.png
+    - assets/icon_white.png
     - assets/logo.jpg
+    - assets/name.png
   # --------------------------------------------------------------------------------
-#  fonts:
-#    - family: body
-#      fonts:
-#        - asset: assets/fonts/body.ttf
+  fonts:
+    - family: madani_thin
+      fonts:
+        - asset: assets/fonts/madani_arabic_thin.ttf
+    - family: madani_extra_light
+      fonts:
+        - asset: assets/fonts/madani_arabic_extra_light.ttf
+    - family: madani_light
+      fonts:
+        - asset: assets/fonts/madani_arabic_light.ttf
+    - family: madani_regular
+      fonts:
+        - asset: assets/fonts/madani_arabic_regular.ttf
+    - family: madani_medium
+      fonts:
+        - asset: assets/fonts/madani_arabic_medium.ttf
+    - family: madani_semi_bold
+      fonts:
+        - asset: assets/fonts/madani_arabic_semi_bold.ttf
+    - family: madani_bold
+      fonts:
+        - asset: assets/fonts/madani_arabic_bold.ttf
+    - family: madani_extra_bold
+      fonts:
+        - asset: assets/fonts/madani_arabic_extra_bold.ttf
+    - family: madani_black
+      fonts:
+        - asset: assets/fonts/madani_arabic_black.ttf
+    - family: madani_variable
+      fonts:
+        - asset: assets/fonts/madani_arabic_variable.ttf
+    - family: montreal
+      fonts:
+        - asset: assets/fonts/montreal.ttf
 # --------------------------------------------------------------------------------

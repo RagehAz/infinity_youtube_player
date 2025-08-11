@@ -4,19 +4,22 @@ import 'package:infinity_youtube/core/theme/colorz.dart';
 
 class TheLayout extends StatelessWidget {
   // --------------------------------------------------------------------------
-  const TheLayout({required this.child, super.key});
+  const TheLayout({
+    required this.child,
+    this.backgroundColor,
+    super.key});
   // --------------------
   final Widget child;
-  // -----------------------------------------------------------------------------
+  final Color? backgroundColor;
+  // --------------------------------------------------------------------------
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colorz.infinityLightGrey,
+      backgroundColor: backgroundColor ?? Colorz.majorelleBlue,
       appBar: const TheAppBar(),
       body: child,
     );
     // --------------------
   }
-
-  // -----------------------------------------------------------------------------
+  // --------------------------------------------------------------------------
 }

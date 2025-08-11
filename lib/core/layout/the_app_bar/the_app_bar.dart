@@ -31,7 +31,7 @@ class TheAppBar extends StatelessWidget implements PreferredSizeWidget {
       height: _appBarHeight + topMargin,
       padding: EdgeInsets.only(top: topMargin),
       decoration: const BoxDecoration(
-        color: Colorz.infinityDarkGrey,
+        color: Colorz.white255,
         // border: Borderers.borderOnly(
         //   color: Colorz.white125,
         //   bottom: true,
@@ -41,11 +41,12 @@ class TheAppBar extends StatelessWidget implements PreferredSizeWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
+
           SuperBox(
             onTap: () => Routing.goTo(route: Routing.routeHome),
             height: _appBarHeight,
             width: _appBarHeight,
-            icon: Iconz.icon,
+            icon: Iconz.iconColored,
             iconSizeFactor: 0.7,
             splashColor: Colorz.nothing,
             margins: const EdgeInsets.symmetric(horizontal: 10),
@@ -53,20 +54,29 @@ class TheAppBar extends StatelessWidget implements PreferredSizeWidget {
 
           const SuperPopMenu(
             corners: BorderRadius.all(Radius.circular(15)),
-            borderColor: Colorz.white125,
+            borderColor: Colorz.majorelleBlueDark3,
             // offset: const Offset(0, 0),
-            bubbleColor: Colorz.infinityDarkGrey,
+            bubbleColor: Colorz.majorelleBlue,
             enabled: true,
             popupChild: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
+              children: <Widget>[
+
+                /// SPACING
+                SizedBox(width: 10, height: 10),
+
                 /// HOME
-                TheMenuButton(text: 'Home', route: Routing.routeHome),
+                TheMenuButton(text: 'HOME', route: Routing.routeHome),
+
+                /// SPACING
+                SizedBox(width: 10, height: 10),
 
                 /// For Demo
-                TheMenuButton(text: 'Video (Demo)', route: Routing.routeVideo),
+                TheMenuButton(text: 'VIDEO (Demo)', route: Routing.routeVideo),
 
-                // --------------------
+                /// SPACING
+                SizedBox(width: 10, height: 10),
+
               ],
             ),
             child: Padding(
@@ -74,12 +84,14 @@ class TheAppBar extends StatelessWidget implements PreferredSizeWidget {
               child: SuperImage(
                 height: Scale.appBarHeight,
                 width: Scale.appBarHeight,
-                pic: Icons.menu,
+                pic: Iconz.palette,
+                iconColor: Colorz.majorelleBlue,
                 loading: false,
                 scale: 0.6,
               ),
             ),
           ),
+
         ],
       ),
     );
