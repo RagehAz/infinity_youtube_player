@@ -25,6 +25,7 @@ abstract class Iconz {
   // --------------------
   /// artworks
   static const String logo = 'assets/logo.jpg' ;
+  static const String logoPlain = 'assets/logo_plain.jpg' ;
   static const String banner = 'assets/banner.jpg' ;
   static const String iconColored = 'assets/icon.png' ;
   static const String iconWhite = 'assets/icon_white.png' ;

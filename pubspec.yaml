@@ -14,7 +14,7 @@ dependencies:
     sdk: flutter
   # ------------------------------------
   # NO NEED - FOR REFERENCE
-  #  flutter_launcher_icons: ^0.14.4
+  flutter_launcher_icons: ^0.14.4
   # ------------------------------------
   go_router: ^15.1.2
   no_screenshot: ^0.3.2-beta.3
@@ -32,17 +32,17 @@ dev_dependencies:
     sdk: flutter
   lint: ^2.1.2
   # ------------------------------------
-#flutter_launcher_icons:
-#  android: true
-#  ios: true
-#  image_path: "assets/logo.jpg"
-#  adaptive_icon_background: "#5943e9"
-#  adaptive_icon_foreground: "assets/logo.jpg"
-#  adaptive_icon_foreground_inset: 0
-#  windows:
-#    generate: true
-#    image_path: "assets/logo.jpg"
-#    icon_size: 48 # min:48, max:256, default: 48
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/logo_plain.jpg"
+  adaptive_icon_background: "#5943e9"
+  adaptive_icon_foreground: "assets/logo_plain.jpg"
+  adaptive_icon_foreground_inset: 0
+  windows:
+    generate: true
+    image_path: "assets/logo_plain.jpg"
+    icon_size: 48 # min:48, max:256, default: 48
 # --------------------------------------------------------------------------------
 flutter:
   uses-material-design: true
