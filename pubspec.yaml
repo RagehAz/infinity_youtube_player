@@ -3,7 +3,7 @@ description: "a youtube video player for infinity"
 publish_to: "none"
 # --------------------------------------------------------------------------------
 # THE_APP_VERSION
-version: 0.0.2
+version: 0.0.1
 # --------------------------------------------------------------------------------
 environment:
   sdk: ">=3.8.1 <4.0.0"

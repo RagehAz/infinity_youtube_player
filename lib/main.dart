@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:infinity_youtube/app/router/router.dart';
@@ -14,7 +16,11 @@ Future<void> main() async {
   // final WidgetsBinding _binding =
   WidgetsFlutterBinding.ensureInitialized();
   MediaKit.ensureInitialized();
-  await NoScreenshot.instance.screenshotOff();
+
+  if (!Platform.isWindows) {
+    await NoScreenshot.instance.screenshotOff();
+  }
+
   runApp(const Starter());
 }
 // --------------------------------------------------------------------------
