@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:infinity_youtube/app/router/router.dart';
 import 'package:infinity_youtube/app/the_youtube_player/the_you_tube_player.dart';
 import 'package:infinity_youtube/core/layout/the_layout.dart';
+import 'package:infinity_youtube/core/services/audio_source_analyzer.dart';
+import 'package:infinity_youtube/core/services/audio_source_model.dart';
 import 'package:infinity_youtube/core/services/video_source_analyzer.dart';
 import 'package:infinity_youtube/core/services/video_source_model.dart';
 import 'package:infinity_youtube/core/services/youtube.dart';
@@ -24,12 +26,13 @@ class VideoScreen extends StatefulWidget {
 class _VideoScreenState extends State<VideoScreen> {
   // --------------------------------------------------------------------------
   static const String _youtubeURL =
-      'https://youtu.be/46l2HlRQHk8?si=hmnKYWLPKVGRmXqS';
+      'https://youtu.be/MbAs4s_S0rc?si=lc5Rrj6kmOF6mJc1';
   // --------------------------------------------------------------------------
   final YoutubeParser parser = YoutubeParser();
   String? _videoYoutubeURL;
   List<VideoSourceModel> _videoSources = <VideoSourceModel>[];
   VideoSourceModel? _selectedVideoSource;
+  AudioSourceModel? _selectedAudioSource;
   late Player player;
   late VideoController controller;
   Duration? currentPosition;
@@ -106,9 +109,9 @@ class _VideoScreenState extends State<VideoScreen> {
           );
 
           /// SELECTED
-          // _selectedAudioSource = AudioSourceAnalyzer.getSmallestAudio(
-          //   audioSources: _youtubeSource.audio,
-          // );
+          _selectedAudioSource = AudioSourceAnalyzer.getSmallestAudio(
+            audioSources: _youtubeSource.audio,
+          );
           _selectedVideoSource = _videoSources.last;
 
           /// BUILD
@@ -138,6 +141,10 @@ class _VideoScreenState extends State<VideoScreen> {
       await player.play();
       while (!player.state.playing || player.state.buffering) {
         await Future.delayed(const Duration(milliseconds: 100));
+      }
+
+      if (_selectedAudioSource != null) {
+        await player.setAudioTrack(AudioTrack.uri(_selectedAudioSource!.audio));
       }
 
       if (position != null) {
