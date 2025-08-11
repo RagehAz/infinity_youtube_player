@@ -268,45 +268,47 @@ class _VideoScreenState extends State<VideoScreen> {
     // --------------------
     return TheLayout(
       backgroundColor: Colorz.black255,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          // --------------------
-          if (_canBuildVideo == false)
-            SuperText(
-              boxWidth: context.screenWidth,
-              text: _loadingText,
-              textHeight: 30,
-              margins: 10,
-              font: InfinityFont.regular,
-            ),
-          // --------------------
-          if (_canBuildVideo == true)
-            SuperText(
-              boxWidth: context.screenWidth,
-              text: '<Video Title>',
-              textHeight: 30,
-              margins: 10,
-              font: InfinityFont.regular,
-            ),
-          // --------------------
-          /// NEW PLAYER
-          if (_canBuildVideo == true)
-            MaterialVideoControlsTheme(
-              normal: controls,
-              fullscreen: controls,
-              child: Container(
-                width: context.screenWidth,
-                height: context.screenWidth * 9.0 / 16.0,
-                color: Colorz.googleRed,
-                child: Video(
-                  controller: controller,
-                  controls: (state) => MaterialVideoControls(state),
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            // --------------------
+            if (_canBuildVideo == false)
+              SuperText(
+                boxWidth: context.screenWidth,
+                text: _loadingText,
+                textHeight: 30,
+                margins: 10,
+                font: InfinityFont.regular,
+              ),
+            // --------------------
+            if (_canBuildVideo == true)
+              SuperText(
+                boxWidth: context.screenWidth,
+                text: '<Video Title>',
+                textHeight: 30,
+                margins: 10,
+                font: InfinityFont.regular,
+              ),
+            // --------------------
+            /// NEW PLAYER
+            if (_canBuildVideo == true)
+              MaterialVideoControlsTheme(
+                normal: controls,
+                fullscreen: controls,
+                child: Container(
+                  width: context.screenWidth,
+                  height: context.screenWidth * 9.0 / 16.0,
+                  color: Colorz.googleRed,
+                  child: Video(
+                    controller: controller,
+                    controls: (state) => MaterialVideoControls(state),
+                  ),
                 ),
               ),
-            ),
-          // --------------------
-        ],
+            // --------------------
+          ],
+        ),
       ),
     );
     // --------------------

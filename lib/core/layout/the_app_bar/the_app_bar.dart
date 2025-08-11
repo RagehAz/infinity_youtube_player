@@ -37,62 +37,70 @@ class TheAppBar extends StatelessWidget implements PreferredSizeWidget {
         //   bottom: true,
         // ),
       ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
 
-          SuperBox(
-            onTap: () => Routing.goTo(route: Routing.routeHome),
-            height: _appBarHeight,
-            width: _appBarHeight,
-            icon: Iconz.iconColored,
-            iconSizeFactor: 0.7,
-            splashColor: Colorz.nothing,
-            margins: const EdgeInsets.symmetric(horizontal: 10),
-          ),
-
-          const SuperPopMenu(
-            corners: BorderRadius.all(Radius.circular(15)),
-            borderColor: Colorz.majorelleBlueDark3,
-            // offset: const Offset(0, 0),
-            bubbleColor: Colorz.majorelleBlue,
-            enabled: true,
-            popupChild: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: <Widget>[
-
-                /// SPACING
-                SizedBox(width: 10, height: 10),
-
-                /// HOME
-                TheMenuButton(text: 'HOME', route: Routing.routeHome),
-
-                /// SPACING
-                SizedBox(width: 10, height: 10),
-
-                /// For Demo
-                TheMenuButton(text: 'VIDEO (Demo)', route: Routing.routeVideo),
-
-                /// SPACING
-                SizedBox(width: 10, height: 10),
-
-              ],
+            SuperBox(
+              onTap: () => Routing.goTo(route: Routing.routeHome),
+              height: _appBarHeight,
+              width: _appBarHeight,
+              icon: Iconz.iconColored,
+              iconSizeFactor: 0.7,
+              splashColor: Colorz.nothing,
+              margins: const EdgeInsets.symmetric(horizontal: 10),
             ),
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10),
-              child: SuperImage(
-                height: Scale.appBarHeight,
-                width: Scale.appBarHeight,
-                pic: Iconz.palette,
-                iconColor: Colorz.majorelleBlue,
-                loading: false,
-                scale: 0.6,
+
+            SizedBox(
+              height: _appBarHeight,
+              width: _screenWidth - ((_appBarHeight + 20) * 2),
+            ),
+
+            const SuperPopMenu(
+              corners: BorderRadius.all(Radius.circular(15)),
+              borderColor: Colorz.majorelleBlueDark3,
+              // offset: const Offset(0, 0),
+              bubbleColor: Colorz.majorelleBlue,
+              enabled: true,
+              popupChild: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+
+                  /// SPACING
+                  SizedBox(width: 10, height: 10),
+
+                  /// HOME
+                  TheMenuButton(text: 'HOME', route: Routing.routeHome),
+
+                  /// SPACING
+                  SizedBox(width: 10, height: 10),
+
+                  /// For Demo
+                  TheMenuButton(text: 'VIDEO (Demo)', route: Routing.routeVideo),
+
+                  /// SPACING
+                  SizedBox(width: 10, height: 10),
+
+                ],
+              ),
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                child: SuperImage(
+                  height: Scale.appBarHeight,
+                  width: Scale.appBarHeight,
+                  pic: Iconz.palette,
+                  iconColor: Colorz.majorelleBlue,
+                  loading: false,
+                  scale: 0.6,
+                ),
               ),
             ),
-          ),
 
-        ],
+          ],
+        ),
       ),
     );
     // --------------------
