@@ -11,10 +11,11 @@ abstract class WindowsScreenShotBlocker {
   // --------------------
   /// TESTED : WORKS PERFECT
   static void block() {
-    final Pointer<Utf16> windowTitle = 'infinity_youtube'.toNativeUtf16();
-    final int window = FindWindow(nullptr, windowTitle);
+    final Pointer<Utf16> className = 'FLUTTER_RUNNER_WIN32_WINDOW'
+        .toNativeUtf16();
+    final int window = FindWindow(className, nullptr);
     SetWindowDisplayAffinity(window, WDA_EXCLUDEFROMCAPTURE);
-    free(windowTitle);
+    free(className);
   }
   // -----------------------------------------------------------------------------
 
@@ -23,10 +24,12 @@ abstract class WindowsScreenShotBlocker {
   // --------------------
   /// TESTED : WORKS PERFECT
   static void restore() {
-    final Pointer<Utf16> windowTitle = 'infinity_youtube'.toNativeUtf16();
-    final int window = FindWindow(nullptr, windowTitle);
+    final Pointer<Utf16> className = 'FLUTTER_RUNNER_WIN32_WINDOW'
+        .toNativeUtf16();
+    final int window = FindWindow(className, nullptr);
     SetWindowDisplayAffinity(window, WDA_NONE);
-    free(windowTitle);
+    free(className);
   }
+
   // -----------------------------------------------------------------------------
 }

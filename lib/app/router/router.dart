@@ -41,7 +41,6 @@ abstract class Routing {
     navigatorKey: mainNavKey,
     initialLocation: '/',
     routes: <GoRoute>[
-
       // --------------------
 
       /// HOME
@@ -55,7 +54,14 @@ abstract class Routing {
       GoRoute(
         path: '/$routeVideo',
         name: routeVideo,
-        builder: (context, state) => const VideoScreen(),
+        builder: (context, state) {
+          final params = state.uri.queryParameters;
+          final data = params['encrypted'];
+          if (data != null) {
+            print('Decrypted data: $data');
+          }
+          return const VideoScreen();
+        },
       ),
 
       // --------------------
@@ -66,7 +72,6 @@ abstract class Routing {
       //   name: routeRedirect,
       //   builder: (context, state) => const FTokenWebScreen(),
       // ),
-
     ],
   );
   // --------------------------------------------------------------------------
@@ -75,12 +80,10 @@ abstract class Routing {
 
   // --------------------
   /// TESTED : WORKS PERFECT
-  static Future<void> goTo({
-    required String route,
-    String? arg,
-  }) async  {
+  static Future<void> goTo({required String route, String? arg}) async {
     getTheMainContext().goNamed(route);
   }
+
   // --------------------
   static Future<void> goBack({
     required BuildContext? context,
@@ -88,29 +91,23 @@ abstract class Routing {
     dynamic passedData,
     bool addPostFrameCallback = false,
   }) async {
-
     /// OLD
-    if (context != null){
-
-      if (Navigator.canPop(context) == true){
-
-        if (addPostFrameCallback == true){
+    if (context != null) {
+      if (Navigator.canPop(context) == true) {
+        if (addPostFrameCallback == true) {
           SchedulerBinding.instance.addPostFrameCallback((_) {
             Navigator.pop(context, passedData);
           });
-        }
-
-        else {
-          await Future.delayed(Duration.zero, (){
+        } else {
+          await Future.delayed(Duration.zero, () {
             Navigator.pop(context, passedData);
           });
         }
-
       }
-
     }
-
   }
+
   // --------------------------------------------------------------------------
 }
+
 // --------------------------------------------------------------------------
