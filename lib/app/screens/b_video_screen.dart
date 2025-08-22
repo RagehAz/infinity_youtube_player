@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:infinity_youtube/app/router/router.dart';
+import 'package:infinity_youtube/app/router/routing.dart';
 import 'package:infinity_youtube/app/the_youtube_player/the_you_tube_player.dart';
 import 'package:infinity_youtube/core/layout/the_layout.dart';
 import 'package:infinity_youtube/core/services/audio_source_analyzer.dart';

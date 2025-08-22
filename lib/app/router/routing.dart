@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:go_router/go_router.dart';
 import 'package:infinity_youtube/app/screens/a_home_screen.dart';
-import 'package:infinity_youtube/app/screens/b_vdeo_screen.dart';
+import 'package:infinity_youtube/app/screens/b_video_screen.dart';
+import 'package:infinity_youtube/core/services/app_linker.dart';
 // -----------------------------------------------------------------------------
 
 /// MAIN NAV KEY SUPER GLOBAL KEY
@@ -29,9 +30,12 @@ abstract class Routing {
   // --------------------
   static const routeHome = 'home';
   static const routeVideo = 'video';
-  // static const routeVideoInfo = 'info';
   // --------------------
-  // static const routeRedirect = 'redirect';
+  /// NOT USED
+  /*
+  static const routeVideoInfo = 'info';
+  static const routeRedirect = 'redirect';
+   */
   // --------------------------------------------------------------------------
 
   /// ROUTER
@@ -72,8 +76,23 @@ abstract class Routing {
       //   name: routeRedirect,
       //   builder: (context, state) => const FTokenWebScreen(),
       // ),
+
     ],
   );
+  // --------------------------------------------------------------------------
+
+  /// APP LINKING
+
+  // --------------------
+  ///
+  static Future<void> onAppLinkEvent(Uri uri) async {
+
+    /// BLOG FOR TESTING
+    AppLinker.blogURI(uri: uri);
+
+    /// CHECK WHEN TO NAVIGATE AMD HANDLE THIS ...
+
+  }
   // --------------------------------------------------------------------------
 
   /// NAV
@@ -83,8 +102,8 @@ abstract class Routing {
   static Future<void> goTo({required String route, String? arg}) async {
     getTheMainContext().goNamed(route);
   }
-
   // --------------------
+  /// TESTED : WORKS PERFECT
   static Future<void> goBack({
     required BuildContext? context,
     String? invoker,
@@ -106,8 +125,6 @@ abstract class Routing {
       }
     }
   }
-
   // --------------------------------------------------------------------------
 }
-
 // --------------------------------------------------------------------------

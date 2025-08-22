@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:infinity_youtube/app/router/router.dart';
+import 'package:infinity_youtube/app/router/routing.dart';
 import 'package:infinity_youtube/core/shared_components/super_box/super_box.dart';
 import 'package:infinity_youtube/core/theme/colorz.dart';
 import 'package:infinity_youtube/core/theme/fonts.dart';

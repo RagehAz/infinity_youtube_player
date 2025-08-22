@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:infinity_youtube/app/router/router.dart';
+import 'package:infinity_youtube/app/router/routing.dart';
 import 'package:infinity_youtube/core/theme/colorz.dart';
 import 'package:infinity_youtube/core/utilities/app_scroll_behavior.dart';
 import 'package:media_kit/media_kit.dart';
@@ -47,7 +47,6 @@ class _StarterState extends State<Starter> with WidgetsBindingObserver {
     WidgetsBinding.instance.addObserver(this);
     super.initState();
   }
-
   // --------------------
   bool _isInit = true;
   @override
@@ -58,14 +57,12 @@ class _StarterState extends State<Starter> with WidgetsBindingObserver {
     }
     super.didChangeDependencies();
   }
-
   // --------------------
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
-
   // --------------------
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
@@ -80,7 +77,6 @@ class _StarterState extends State<Starter> with WidgetsBindingObserver {
     }
     super.didChangeAppLifecycleState(state);
   }
-
   // ---------------------
   void asyncInSync(Function? asynchronous) {
     if (asynchronous != null) {
@@ -91,7 +87,6 @@ class _StarterState extends State<Starter> with WidgetsBindingObserver {
       });
     }
   }
-
   // --------------------
   /// TESTED : WORKS PERFECT
   void blog(dynamic msg, {String? invoker}) {
@@ -102,7 +97,6 @@ class _StarterState extends State<Starter> with WidgetsBindingObserver {
       return true;
     }(), '_');
   }
-
   // -----------------------------------------------------------------------------
   @override
   Widget build(BuildContext context) {
@@ -134,7 +128,6 @@ class _StarterState extends State<Starter> with WidgetsBindingObserver {
       routerConfig: Routing.router,
     );
   }
-
   // -----------------------------------------------------------------------------
 }
 // --------------------------------------------------------------------------
