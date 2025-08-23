@@ -63,14 +63,13 @@ class _UrlReaderTestScreenState extends State<UrlReaderTestScreen> {
   }
   // --------------------
   String? _log = 'Nothing to log';
-  // --------------------
-  /*
-    infinity://infinity.com/video
-    sample://bar/#/book/hello-bar
+  // --------------------------------------------------------------------------
 
-    https://www.example.com/#/book/hello-www-example
-    https://example.com/#/book/hello-example
-   */
+  /// NOTE
+
+  // --------------------
+  /// use the below link in chrome browser to test
+  /// infinity://infinity.com/video
   // -----------------------------------------------------------------------------
   @override
   Widget build(BuildContext context) {
@@ -92,9 +91,11 @@ class _UrlReaderTestScreenState extends State<UrlReaderTestScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
 
+              /// BUTTON
               SuperBox(
-                  height: 50,
+                height: 50,
                 text: 'Register msx',
+                color: Colorz.black255,
                 onTap: () async {
 
                     await AppLinker.register('infinity');
@@ -102,16 +103,17 @@ class _UrlReaderTestScreenState extends State<UrlReaderTestScreen> {
                 },
               ),
 
-              // --------------------
+              /// TEXT
               SuperText(
                 boxWidth: context.screenWidth,
                 text: _log,
                 textHeight: 30,
-                margins: 10,
+                margins: 20,
                 maxLines: 20,
+                boxColor: Colorz.white20,
                 font: InfinityFont.regular,
               ),
-              // --------------------
+
             ],
           ),
         ),
