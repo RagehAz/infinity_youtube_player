@@ -65,10 +65,9 @@ class _UrlReaderTestScreenState extends State<UrlReaderTestScreen> {
   String? _log = 'Nothing to log';
   // --------------------
   /*
-
     infinity://infinity.com/video
-
     sample://bar/#/book/hello-bar
+
     https://www.example.com/#/book/hello-www-example
     https://example.com/#/book/hello-example
    */
@@ -76,34 +75,45 @@ class _UrlReaderTestScreenState extends State<UrlReaderTestScreen> {
   @override
   Widget build(BuildContext context) {
     // --------------------
-    return TheLayout(
-      backgroundColor: Colorz.googleRed,
-      child: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+    return AppLinkListener(
+      onEvent: (Uri uri){
 
-            SuperBox(
-              height: 50,
-              text: 'Register msx',
-              onTap: () async {
+        if (mounted){
+          setState(() {
+            _log = AppLinker.getUriBlogStrings(uri: uri);
+          });
+        }
 
-                await AppLinker.register('infinity');
+      },
+      child: TheLayout(
+        backgroundColor: Colorz.googleRed,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
 
-              },
-            ),
+              SuperBox(
+                  height: 50,
+                text: 'Register msx',
+                onTap: () async {
 
-            // --------------------
-            SuperText(
-              boxWidth: context.screenWidth,
-              text: _log,
-              textHeight: 30,
-              margins: 10,
-              maxLines: 20,
-              font: InfinityFont.regular,
-            ),
-            // --------------------
-          ],
+                    await AppLinker.register('infinity');
+
+                },
+              ),
+
+              // --------------------
+              SuperText(
+                boxWidth: context.screenWidth,
+                text: _log,
+                textHeight: 30,
+                margins: 10,
+                maxLines: 20,
+                font: InfinityFont.regular,
+              ),
+              // --------------------
+            ],
+          ),
         ),
       ),
     );

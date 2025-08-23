@@ -1,8 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:infinity_youtube/app/router/routing.dart';
-import 'package:infinity_youtube/app/the_youtube_player/the_you_tube_player.dart';
 import 'package:infinity_youtube/core/services/app_linker.dart';
 import 'package:infinity_youtube/core/theme/colorz.dart';
 import 'package:infinity_youtube/core/utilities/app_scroll_behavior.dart';
