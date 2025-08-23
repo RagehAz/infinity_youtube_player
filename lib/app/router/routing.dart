@@ -3,7 +3,8 @@ import 'package:flutter/scheduler.dart';
 import 'package:go_router/go_router.dart';
 import 'package:infinity_youtube/app/screens/a_home_screen.dart';
 import 'package:infinity_youtube/app/screens/b_video_screen.dart';
-import 'package:infinity_youtube/core/services/app_linker.dart';
+import 'package:infinity_youtube/app/screens/test_screens/screen_blocking_test_screen.dart';
+import 'package:infinity_youtube/app/screens/test_screens/url_reader_test_screen.dart';
 // -----------------------------------------------------------------------------
 
 /// MAIN NAV KEY SUPER GLOBAL KEY
@@ -30,12 +31,7 @@ abstract class Routing {
   // --------------------
   static const routeHome = 'home';
   static const routeVideo = 'video';
-  // --------------------
-  /// NOT USED
-  /*
-  static const routeVideoInfo = 'info';
-  static const routeRedirect = 'redirect';
-   */
+  static const testUrlReader = 'testUrlReader';
   static const testScreenBlocker = 'testScreenBlocker';
   // --------------------------------------------------------------------------
 
@@ -69,12 +65,18 @@ abstract class Routing {
         },
       ),
 
+      /// URL READER TEST
+      GoRoute(
+        path: '/$testUrlReader',
+        name: testUrlReader,
+        builder: (context, state) => const UrlReaderTestScreen(uri: null),
+      ),
 
       /// SCREEN BLOCKER
       GoRoute(
         path: '/$testScreenBlocker',
         name: testScreenBlocker,
-        builder: (context, state) => const UrlReaderTestScreen(uri: null),
+        builder: (context, state) => const ScreenBlockingTestScreen(),
       ),
 
       // --------------------
@@ -93,14 +95,10 @@ abstract class Routing {
   /// APP LINKING
 
   // --------------------
-  ///
+  /// TESTED : WORKS PERFECT
   static Future<void> onAppLinkEvent(Uri uri) async {
-
-    /// BLOG FOR TESTING
-    AppLinker.blogURI(uri: uri);
-
-    /// CHECK WHEN TO NAVIGATE AMD HANDLE THIS ...
-
+    // blog(AppLinker.getUriBlogStrings(uri: uri));
+    getTheMainContext().go(uri.path);
   }
   // --------------------------------------------------------------------------
 

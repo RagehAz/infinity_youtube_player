@@ -1,30 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:infinity_youtube/core/layout/the_layout.dart';
-import 'package:infinity_youtube/core/services/screen_blocker.dart';
+import 'package:infinity_youtube/core/services/app_linker.dart';
 import 'package:infinity_youtube/core/shared_components/super_box/super_box.dart';
 import 'package:infinity_youtube/core/shared_components/super_text/super_text.dart';
 import 'package:infinity_youtube/core/theme/colorz.dart';
 import 'package:infinity_youtube/core/theme/fonts.dart';
 import 'package:infinity_youtube/core/utilities/contextual.dart';
 
-class ScreenBlockingTestScreen extends StatefulWidget {
+class UrlReaderTestScreen extends StatefulWidget {
   // --------------------------------------------------------------------------
-  const ScreenBlockingTestScreen({
+  const UrlReaderTestScreen({
+    required this.uri,
     super.key
   });
   // --------------------
+  final Uri? uri;
+  // --------------------
   @override
-  _ScreenBlockingTestScreenState createState() => _ScreenBlockingTestScreenState();
+  _UrlReaderTestScreenState createState() => _UrlReaderTestScreenState();
   // --------------------------------------------------------------------------
 }
 
-class _ScreenBlockingTestScreenState extends State<ScreenBlockingTestScreen> {
+class _UrlReaderTestScreenState extends State<UrlReaderTestScreen> {
   // -----------------------------------------------------------------------------
   @override
   void initState() {
-
-    _screenIsBlocked = ScreenBlocker.instance.isBlocked;
-
     super.initState();
   }
   // --------------------
@@ -62,12 +62,13 @@ class _ScreenBlockingTestScreenState extends State<ScreenBlockingTestScreen> {
     super.dispose();
   }
   // --------------------
-  bool _screenIsBlocked = true;
+  String? _log = 'Nothing to log';
   // --------------------
   /*
-    infinity://infinity.com/bobo
-    sample://bar/#/book/hello-bar
 
+    infinity://infinity.com/video
+
+    sample://bar/#/book/hello-bar
     https://www.example.com/#/book/hello-www-example
     https://example.com/#/book/hello-example
    */
@@ -82,47 +83,31 @@ class _ScreenBlockingTestScreenState extends State<ScreenBlockingTestScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
 
-            /// TEXT
+            SuperBox(
+              height: 50,
+              text: 'Register msx',
+              onTap: () async {
+
+                await AppLinker.register('infinity');
+
+              },
+            ),
+
+            // --------------------
             SuperText(
               boxWidth: context.screenWidth,
-              text: _screenIsBlocked ? 'Screen should be blocked' : 'Screen is now visible',
+              text: _log,
               textHeight: 30,
               margins: 10,
               maxLines: 20,
               font: InfinityFont.regular,
             ),
-
-            /// BUTTON
-            SuperBox(
-              height: 50,
-              text: _screenIsBlocked ? 'Tap to unblock screen' : 'Click to block screen',
-              color: Colorz.black255,
-              onTap: () async {
-
-                /// SHOULD UNBLOCK
-                if (_screenIsBlocked){
-                  await ScreenBlocker.restore();
-                }
-
-                /// SHOULD BLOCK
-                else {
-                  await ScreenBlocker.block();
-                }
-
-                if (mounted){
-                  setState(() {
-                    _screenIsBlocked = ScreenBlocker.instance.isBlocked;
-                  });
-                }
-
-              },
-            ),
-
+            // --------------------
           ],
         ),
       ),
     );
     // --------------------
   }
-// -----------------------------------------------------------------------------
+  // -----------------------------------------------------------------------------
 }

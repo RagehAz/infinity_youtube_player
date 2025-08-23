@@ -84,6 +84,11 @@ class TheAppBar extends StatelessWidget implements PreferredSizeWidget {
                   /// SPACING
                   SizedBox(width: 10, height: 10),
 
+                  /// URL TEST
+                  TheMenuButton(text: 'URL Test (Demo)', route: Routing.testUrlReader),
+
+                  /// SPACING
+                  SizedBox(width: 10, height: 10),
 
                   /// SCREEN BLOCK TESTER
                   TheMenuButton(text: 'Screen blocker (Demo)', route: Routing.testScreenBlocker),
