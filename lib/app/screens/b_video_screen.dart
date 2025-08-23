@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:infinity_youtube/app/router/routing.dart';
 import 'package:infinity_youtube/app/the_youtube_player/the_you_tube_player.dart';
 import 'package:infinity_youtube/core/layout/the_layout.dart';
+import 'package:infinity_youtube/core/services/app_linker.dart';
 import 'package:infinity_youtube/core/services/audio_source_analyzer.dart';
 import 'package:infinity_youtube/core/services/audio_source_model.dart';
 import 'package:infinity_youtube/core/services/video_source_analyzer.dart';
@@ -12,12 +14,18 @@ import 'package:infinity_youtube/core/shared_components/super_text/super_text.da
 import 'package:infinity_youtube/core/theme/colorz.dart';
 import 'package:infinity_youtube/core/theme/fonts.dart';
 import 'package:infinity_youtube/core/utilities/contextual.dart';
+import 'package:infinity_youtube/core/utilities/rest.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
 
 class VideoScreen extends StatefulWidget {
   // --------------------------------------------------------------------------
-  const VideoScreen({super.key});
+  const VideoScreen({
+    required this.encryptedData,
+    super.key,
+  });
+  // --------------------
+  final String? encryptedData;
   // --------------------
   @override
   State<VideoScreen> createState() => _VideoScreenState();
@@ -25,9 +33,6 @@ class VideoScreen extends StatefulWidget {
 }
 
 class _VideoScreenState extends State<VideoScreen> {
-  // --------------------------------------------------------------------------
-  static const String _youtubeURL =
-      'https://youtu.be/MbAs4s_S0rc?si=lc5Rrj6kmOF6mJc1';
   // --------------------------------------------------------------------------
   final YoutubeParser parser = YoutubeParser();
   String? _videoYoutubeURL;
@@ -40,7 +45,6 @@ class _VideoScreenState extends State<VideoScreen> {
   // --------------------------------------------------------------------------
   @override
   void initState() {
-    _videoYoutubeURL = _youtubeURL;
 
     player = Player();
 
@@ -52,7 +56,6 @@ class _VideoScreenState extends State<VideoScreen> {
 
     super.initState();
   }
-
   // --------------------
   bool _isInit = true;
   @override
@@ -66,7 +69,7 @@ class _VideoScreenState extends State<VideoScreen> {
     }
     super.didChangeDependencies();
   }
-
+  // --------------------
   @override
   void dispose() {
     parser.dispose();
@@ -89,14 +92,18 @@ class _VideoScreenState extends State<VideoScreen> {
       });
     }
   }
-
   // --------------------
   /// TESTED : WORKS PERFECT
   Future<void> _loadVideo() async {
     blog('_loadVideo(Start)');
 
+    setLoadingText('Reading video info ..');
+
+    await _callForVideoPermission();
+
     if (_videoYoutubeURL != null) {
-      setLoadingText('Reading video info ..');
+
+      setLoadingText('Opening the video ..');
 
       final YouTubeSource _youtubeSource = await parser.parse(
         _videoYoutubeURL!,
@@ -122,16 +129,50 @@ class _VideoScreenState extends State<VideoScreen> {
 
         await _startPlayer();
       }
+
     }
 
     blog('_loadVideo(End)');
+  }
+  // --------------------
+  ///
+  Future<void> _callForVideoPermission() async {
+
+    blog('_callForVideoPermission.widget.encryptedData(${widget.encryptedData})');
+
+    final Response? _response = await Rest.postMap(
+      /// TASK_DO_ME : <baseUrl>
+      rawLink: '<baseUrl>/api/decrypt',
+      map: {
+        'encrypted': widget.encryptedData,
+      },
+      headers: {
+        'x-secret-key': 'fdAWtdZpZJctRPDIK_5I7WQ8qLP6nfAr9hS-0oSf_zSUxQYXdzCNaQd9KdircJ6c',
+      },
+    );
+
+    Rest.blogResponse(
+      response: _response,
+    );
+
+    /// TEST URL
+    const String _testURL = 'https://youtu.be/MbAs4s_S0rc?si=lc5Rrj6kmOF6mJc1';
+    final dynamic _receivedURL = _response?.body ?? '';
+
+    if (mounted){
+      setState(() {
+        /// TASK_DO_ME
+        _videoYoutubeURL = AppLinker.isURLFormat(_receivedURL) ? _receivedURL : _testURL;
+      });
+    }
+
   }
   // --------------------------------------------------------------------------
 
   /// VIDEO PLAYING
 
   // --------------------
-  ///
+  /// TESTED : WORKS PERFECT
   Future<void> _startPlayer() async {
     if (_selectedVideoSource != null) {
       final position = currentPosition;
@@ -153,6 +194,7 @@ class _VideoScreenState extends State<VideoScreen> {
       }
     }
   }
+  // --------------------------------------------------------------------------
 
   /// BOTTOM SHEET
 
@@ -223,7 +265,6 @@ class _VideoScreenState extends State<VideoScreen> {
       ],
     );
   }
-
   // --------------------
   /// TESTED : WORKS PERFECT
   Widget _qualityTile({
@@ -247,10 +288,10 @@ class _VideoScreenState extends State<VideoScreen> {
       },
     );
   }
-
   // --------------------------------------------------------------------------
   @override
   Widget build(BuildContext context) {
+    // --------------------
     final controls = MaterialVideoControlsThemeData(
       volumeGesture: true,
       brightnessGesture: true,

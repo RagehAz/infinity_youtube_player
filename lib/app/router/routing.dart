@@ -58,10 +58,9 @@ abstract class Routing {
         builder: (context, state) {
           final params = state.uri.queryParameters;
           final data = params['encrypted'];
-          if (data != null) {
-            print('Decrypted data: $data');
-          }
-          return const VideoScreen();
+          return VideoScreen(
+            encryptedData: data,
+          );
         },
       ),
 

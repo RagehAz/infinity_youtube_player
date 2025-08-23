@@ -117,6 +117,27 @@ class AppLinker {
     return _output;
   }
   // --------------------------------------------------------------------------
+
+  /// CHECKERS
+
+  // --------------------
+  static const String _urlPattern = r'((https?:www\.)|(https?:\/\/)|(www\.))[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9]{1,6}(\/[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)?';
+  // --------------------
+  /// TESTED : WORKS PERFECT
+  static bool isURLFormat(dynamic object) {
+
+    bool _isURLFormat = false;
+
+    if (object != null && object is String) {
+
+      final RegExp regExp = RegExp(_urlPattern);
+      _isURLFormat = regExp.hasMatch(object);
+
+    }
+
+    return _isURLFormat;
+  }
+  // --------------------------------------------------------------------------
 }
 // --------------------------------------------------------------------------
 
