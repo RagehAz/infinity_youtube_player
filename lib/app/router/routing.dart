@@ -36,6 +36,7 @@ abstract class Routing {
   static const routeVideoInfo = 'info';
   static const routeRedirect = 'redirect';
    */
+  static const testScreenBlocker = 'testScreenBlocker';
   // --------------------------------------------------------------------------
 
   /// ROUTER
@@ -66,6 +67,14 @@ abstract class Routing {
           }
           return const VideoScreen();
         },
+      ),
+
+
+      /// SCREEN BLOCKER
+      GoRoute(
+        path: '/$testScreenBlocker',
+        name: testScreenBlocker,
+        builder: (context, state) => const UrlReaderTestScreen(uri: null),
       ),
 
       // --------------------

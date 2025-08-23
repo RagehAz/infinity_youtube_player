@@ -84,6 +84,13 @@ class TheAppBar extends StatelessWidget implements PreferredSizeWidget {
                   /// SPACING
                   SizedBox(width: 10, height: 10),
 
+
+                  /// SCREEN BLOCK TESTER
+                  TheMenuButton(text: 'Screen blocker (Demo)', route: Routing.testScreenBlocker),
+
+                  /// SPACING
+                  SizedBox(width: 10, height: 10),
+
                 ],
               ),
               child: Padding(

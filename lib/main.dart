@@ -1,12 +1,10 @@
-import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:infinity_youtube/app/router/routing.dart';
 import 'package:infinity_youtube/core/theme/colorz.dart';
 import 'package:infinity_youtube/core/utilities/app_scroll_behavior.dart';
 import 'package:media_kit/media_kit.dart';
-import 'package:no_screenshot/no_screenshot.dart';
-import 'core/services/windows_screen_blocker.dart';
+import 'core/services/screen_blocker.dart';
 // --------------------------------------------------------------------------
 
 /// MAIN
@@ -17,12 +15,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   MediaKit.ensureInitialized();
 
-  if (Platform.isWindows == true) {
-    WindowsScreenShotBlocker.restore();
-  }
-  else {
-    await NoScreenshot.instance.screenshotOff();
-  }
+  await ScreenBlocker.init();
 
   runApp(const Starter());
 }
